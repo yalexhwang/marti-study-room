@@ -62,3 +62,50 @@
 		Oops, Someting went wrong. Please try again.
 	</div>
 </div>
+
+<button type="button" class="btn btn-default" ng-click="toggleFullList()">{{fullListBtn}}</button>
+<!-- Word List Table -->
+<table class="table" ng-show="fullListOn">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Word</th>
+			<th>Part of Speech</th>
+			<th>Definition</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Add New</td>
+			<td>
+				<input type="text" class="form-control" placeholder="(English)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.word" required>
+			</td>
+			<td>
+				<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.part" required>
+					<option value="0">명사(noun)</option>
+					<option value="1">대명사(pronoun)</option>
+					<option value="2">동사(verb)</option>
+					<option value="3">형용사(adjective)</option>
+					<option value="4">부사(adverb)</option>
+					<option value="5">전치사(proposition)</option>
+					<option value="6">접속사(conjuction)</option>
+					<option value="7">감탄사(interjection)</option>
+				</select>
+			</td>
+			<td>
+				<input type="text" class="form-control" placeholder="(ex. to eat)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.definition" required>
+			</td>
+			<td></td>
+		</tr>
+
+		<tr ng-repeat="word in fullList track by $index">
+			<td>{{$index + 1}}</td>
+			<td>{{word.word}}</td>
+			<td>{{word.part}}</td>
+			<td>{{word.definition}}</td>
+			<td><a ng-click="showEdit = 1">Edit</a></td>
+		</tr>
+		<div ng-show="showEdit">dd</div>
+	</tbody>
+</table>

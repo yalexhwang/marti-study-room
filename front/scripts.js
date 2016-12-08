@@ -76,9 +76,9 @@ martiApp.service('WordBankService', function($http, $q) {
 
 
 //Controllers
-martiApp.controller('martiCtrl', function($scope, WordBankService) {
+martiApp.controller('martiCtrl', function($scope, $rootScope, WordBankService) {
 	//Default Setting for Word List
-	$scope.fullList = [];
+	$rootScope.fullList = [];
 	$scope.currentList = [];
 	$scope.currentPage = 1;
 	$scope.wordCount = 10;
@@ -92,12 +92,12 @@ martiApp.controller('martiCtrl', function($scope, WordBankService) {
 			var word = rspns.data.doc[i];
 			word.part = convertPartName(rspns.data.doc[i].part);
 			word.language = convertLngName(rspns.data.doc[i].language);
-			$scope.fullList.push(word);
+			$rootScope.fullList.push(word);
 		}
 		//Create the current list
-		$scope.currentList = createCurrentList($scope.fullList, $scope.currentPage, $scope.wordCount);
+		$scope.currentList = createCurrentList($rootScope.fullList, $scope.currentPage, $scope.wordCount);
 		//Create the page array
-		$scope.pages = calculatePageView($scope.fullList.length, $scope.wordCount);
+		$scope.pages = calculatePageView($rootScope.fullList.length, $scope.wordCount);
 	}, function fail(rspns) {
 		console.log(rspns);
 	});
@@ -135,27 +135,31 @@ martiApp.controller('martiCtrl', function($scope, WordBankService) {
 
 });
 
-martiApp.controller('wordbankCtrl', function($scope, WordBankService) {
-	//Initial Setting 
+martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBankService) {
+	//Initial Setting - forms
 	$scope.showFormNotif = 0;
 	$scope.showKOR = 1;
 	$scope.formTitle = "Add Korean";
 	$scope.switchLng = "English";
+	//Initial Setting - full list
+	$scope.fullListOn = 0;
+	$scope.fullListBtn = "Show Full List";
+
 	//Change the form between KOR and ENG
 	$scope.toggleForm = function() {
-		if ($scope.showKOR) {
-			$scope.showKOR = 0;
-			$scope.formTitle = "Add English"
-			$scope.switchLng = "Korean";
-		} else {
-			$scope.showKOR = 1;
-			$scope.formTitle = "Add Korean";
-			$scope.switchLng = "English";
-		}
+		//Currently unavailable
+		$window.alert('Coming Soon');
+		// if ($scope.showKOR) {
+		// 	$scope.showKOR = 0;
+		// 	$scope.formTitle = "Add English"
+		// 	$scope.switchLng = "Korean";
+		// } else {
+		// 	$scope.showKOR = 1;
+		// 	$scope.formTitle = "Add Korean";
+		// 	$scope.switchLng = "English";
+		// }
 	};
 
-	// 
-	// 
 	// 벗다
 	// 사다
 	// 팔다
@@ -209,6 +213,17 @@ martiApp.controller('wordbankCtrl', function($scope, WordBankService) {
 		});
 	};
 
+	$scope.toggleFullList = function() {
+		if ($scope.fullListOn) {
+			$scope.fullListOn = 0;
+			$scope.fullListBtn = "Show Full List";
+		} else {
+			$scope.fullListOn = 1;
+			$scope.fullListBtn = "Hide Full List";
+		}
+	}
+
+	$scope.showEdit = 0;
 });
 
 //Router setting
