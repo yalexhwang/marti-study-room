@@ -8,9 +8,21 @@
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
 	<script src="scripts.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<!-- <link rel="stylesheet" href=""> -->
 </head>
 <body ng-controller="martiCtrl">
+	<div>
+		<h1>Marti's Study Room</h1>
+		<div>
+			<ul>
+				<li><a ng-href="#/">Review</a></li>
+				<li><a ng-href="#/wordbank">Word Bank</a></li>
+				<li><a ng-href="#/quiz">Quiz</a></li>
+			</ul>
+		</div>
+	</div>
 	<div ng-view></div>
 
 </body>

@@ -7,10 +7,11 @@ mongoose.connect(mongoUrl);
 
 router.post('/add', function(req, res, next) {
 	console.log('/add');
-	var lng = req.body.lng;
+	console.log(req.body);
+	var lng = req.body.language;
 	var word = req.body.word;
 	var part = Number(req.body.part);
-	var def = req.body.def;
+	var def = req.body.definition;
 
 	var newWord = new Word({
 		language: lng,
@@ -19,21 +20,36 @@ router.post('/add', function(req, res, next) {
 		definition: def
 	});
 	console.log(newWord);
-	newWord.save(function(err, saved, status) {
+	Word.findOne({'word': newWord.word}, function(err, result) {
 		if (err) {
-			console.log('line25: error in saving a new word');
+			console.log('Error while findind a ducplicate match');
 			console.log(err);
-			res.json({
-				passFail: 0,
-				doc: err
-			});
 		} else {
-			res.json({
-				passFail: 1,
-				doc: saved
-			});
+			if (result) {
+				console.log('result:');
+				console.log(result);
+			} else {
+				console.log('saving the new word');
+				newWord.save(function(err, saved, status) {
+					if (err) {
+						console.log('line25: error in saving a new word');
+						console.log(err);
+						res.json({
+							passFail: 0,
+							doc: err
+						});
+					} else {
+						res.json({
+							passFail: 1,
+							doc: saved
+						});
+					}
+				});
+			}
 		}
 	});
+
+	
 });
 
 router.post('/get_full_list', function(req, res, next) {
@@ -56,9 +72,5 @@ router.post('/get_full_list', function(req, res, next) {
 	});
 });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
 module.exports = router;

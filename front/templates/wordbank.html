@@ -1,0 +1,64 @@
+
+<h4>{{formTitle}} <small><a ng-click="toggleForm()">{{switchLng}}</a></small></h4>
+<div id="KOR-form" ng-show="showKOR">
+	<form ng-submit="addKOR()">
+		<div class="form-group">
+			<label>Word</label>
+			<input type="text" class="form-control" placeholder="(Korean)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.word" required>
+		</div>
+		<div class="form-group">
+			<label>Part of Speech</label>
+			<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.part" required>
+				<option value="0">명사(noun)</option>
+				<option value="1">대명사(pronoun)</option>
+				<option value="2">동사(verb)</option>
+				<option value="3">형용사(adjective)</option>
+				<option value="4">부사(adverb)</option>
+				<option value="5">전치사(proposition)</option>
+				<option value="6">접속사(conjuction)</option>
+				<option value="7">감탄사(interjection)</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Definition</label>
+			<input type="text" class="form-control" placeholder="(ex. to eat)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.definition" required>
+		</div>
+		<button type="submit" class="form-control">Add</button>
+	</form>
+</div>
+
+<div id="ENG-form" ng-hide="showKOR">
+	<form ng-submit="addENG()">
+		<div class="form-group">
+			<label>Word</label>
+			<input type="text" class="form-control" placeholder="(English)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.word" required>
+		</div>
+		<div class="form-group">
+			<label>Part of Speech</label>
+			<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.part" required>
+				<option value="0">명사(noun)</option>
+				<option value="1">대명사(pronoun)</option>
+				<option value="2">동사(verb)</option>
+				<option value="3">형용사(adjective)</option>
+				<option value="4">부사(adverb)</option>
+				<option value="5">전치사(proposition)</option>
+				<option value="6">접속사(conjuction)</option>
+				<option value="7">감탄사(interjection)</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Definition</label>
+			<input type="text" class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.definition" required>
+		</div>
+		<button type="submit" class="form-control">Add</button>
+	</form>
+</div>
+
+<div id="form_notification" ng-show="showFormNotif">
+	<div class="alert alert-success" ng-show="showSuccess">
+		The following word has been added: {{addedWord.word}}
+	</div>
+	<div class="alert alert-danger" ng-show="showFail">
+		Oops, Someting went wrong. Please try again.
+	</div>
+</div>
