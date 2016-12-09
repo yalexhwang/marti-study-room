@@ -1,0 +1,131 @@
+/* line 1, ../sass/wordbank.scss */
+#form-wrapper {
+  width: 100%;
+  margin: 15px auto;
+}
+@media (min-width: 320px) {
+  /* line 1, ../sass/wordbank.scss */
+  #form-wrapper {
+    width: 90%;
+  }
+}
+/* line 12, ../sass/wordbank.scss */
+#form-wrapper #KOR-form {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  background-color: grey;
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+@media (min-width: 320px) {
+  /* line 12, ../sass/wordbank.scss */
+  #form-wrapper #KOR-form {
+    padding: 20px 15px;
+  }
+}
+/* line 25, ../sass/wordbank.scss */
+#form-wrapper #form-notification {
+  width: 90%;
+  max-width: 400px;
+  margin: 15px auto 0px auto;
+}
+
+/* line 32, ../sass/wordbank.scss */
+#table-wrapper {
+  width: 100%;
+  margin: 20px auto;
+}
+@media (min-width: 480px) {
+  /* line 32, ../sass/wordbank.scss */
+  #table-wrapper {
+    padding: 0px 20px;
+  }
+}
+@media (min-width: 900) {
+  /* line 32, ../sass/wordbank.scss */
+  #table-wrapper {
+    padding: 0px 30px;
+  }
+}
+/* line 42, ../sass/wordbank.scss */
+#table-wrapper #view-options {
+  margin-bottom: 5px;
+}
+/* line 46, ../sass/wordbank.scss */
+#table-wrapper #full-list {
+  margin-bottom: 0px;
+}
+
+/* line 4, ../sass/styles.scss */
+body {
+  display: flex;
+  flex-flow: row wrap;
+}
+/* line 8, ../sass/styles.scss */
+body #navigation {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+}
+@media (min-width: 768px) {
+  /* line 8, ../sass/styles.scss */
+  body #navigation {
+    width: 90%;
+  }
+}
+@media (min-width: 990) {
+  /* line 8, ../sass/styles.scss */
+  body #navigation {
+    width: 80%;
+  }
+}
+/* line 19, ../sass/styles.scss */
+body #navigation .sub-nav {
+  flex: 100%;
+}
+/* line 23, ../sass/styles.scss */
+body #navigation #signin-bar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+/* line 27, ../sass/styles.scss */
+body #navigation #signin-bar #signin {
+  font-size: 12px;
+  padding: 5px;
+}
+/* line 34, ../sass/styles.scss */
+body #navigation #title-bar #title {
+  font-size: 32px;
+  text-align: center;
+}
+/* line 40, ../sass/styles.scss */
+body #navigation #menu-bar {
+  max-width: 480px;
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+/* line 51, ../sass/styles.scss */
+body #content {
+  width: 100%;
+  margin: 20px auto;
+  padding: 0px 5px;
+  display: flex;
+  flex-flow: row wrap;
+}
+@media (min-width: 768px) {
+  /* line 51, ../sass/styles.scss */
+  body #content {
+    width: 90%;
+  }
+}
+@media (min-width: 990) {
+  /* line 51, ../sass/styles.scss */
+  body #content {
+    width: 80%;
+  }
+}

@@ -34,8 +34,29 @@ function convertLngName(lng) {
 	}
 }
 
+function createFullList(data, convertPartName, convertLngName) {
+	var arr = [];
+	for (var i = 0; i < data.length; i++) {
+		//Create the full list, convert if necessary
+		var word = data[i];
+		word.part = convertPartName(word.part);
+		word.language = convertLngName(word.language);
+		word.index = i + 1;
+		arr.push(word);
+	}
+	return arr;
+}
+
 function calculatePageView(totalNumOfWords, numPerPage) {
-	var lastPage = Math.ceil(totalNumOfWords / numPerPage); 
+	var lastpage;
+	if (numPerPage == 0) {
+		lastPage = 1;
+	}
+	if (totalNumOfWords < numPerPage) {
+		lastPage = 1;
+	} else {
+		lastPage = Math.ceil(totalNumOfWords / numPerPage);
+	} 
 	var pageArr = [];
 	for (var i = 1; i <= lastPage; i++) {
 		pageArr.push(i);
@@ -44,9 +65,13 @@ function calculatePageView(totalNumOfWords, numPerPage) {
 }
 
 function createCurrentList(fullList, currentPage, numPerPage) {
-	var startingIndex = numPerPage * (currentPage - 1);
-	var endingIndex = numPerPage * currentPage;
-	return fullList.slice(startingIndex, endingIndex);
+	if (numPerPage == 0) {
+		console.log('numPerPage == 0');
+		return fullList;
+	} else {
+		console.log('numPerPage != 0');
+		return fullList.slice(numPerPage * (currentPage - 1), numPerPage * currentPage);
+	}
 }
 
 //Services
@@ -83,6 +108,13 @@ martiApp.config(function($routeProvider) {
 	.when('/wordbank', {
 		controller: 'wordbankCtrl',
 		templateUrl: 'templates/wordbank.html'
+	})
+	.when('/quiz', {
+		controller: 'quizCtrl',
+		templateUrl: 'templates/quiz.html'
+	})
+	.otherwise({
+		redirectTo: '/'
 	});
 });
 
