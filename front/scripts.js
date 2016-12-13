@@ -39,10 +39,28 @@ function createFullList(data, convertPartName, convertLngName) {
 	for (var i = 0; i < data.length; i++) {
 		//Create the full list, convert if necessary
 		var word = data[i];
-		word.part = convertPartName(word.part);
+		word.partName = convertPartName(word.part);
 		word.language = convertLngName(word.language);
 		word.index = i + 1;
 		arr.push(word);
+	}
+	return arr;
+}
+
+function createCurrentList(fullList, categoryNum) {
+	var arr = [];
+	var index = 1;
+	for (var i = 0; i < fullList.length; i++) {
+		if (categoryNum === "all") {
+			var word = fullList[i];
+			word.index = i + 1;
+			arr.push(word);
+		} else if (fullList[i].part == categoryNum) {
+			var word = fullList[i];
+			word.index = index;
+			arr.push(word);
+			index++;
+		}
 	}
 	return arr;
 }
@@ -64,14 +82,9 @@ function calculatePageView(totalNumOfWords, numPerPage) {
 	return pageArr;
 }
 
-function createCurrentList(fullList, currentPage, numPerPage) {
-	if (numPerPage == 0) {
-		console.log('numPerPage == 0');
-		return fullList;
-	} else {
-		console.log('numPerPage != 0');
-		return fullList.slice(numPerPage * (currentPage - 1), numPerPage * currentPage);
-	}
+function createPageList(currentList, currentPage, numPerPage) {
+	var arr = currentList.slice(numPerPage * (currentPage - 1), numPerPage * currentPage);
+	return arr;
 }
 
 //Services

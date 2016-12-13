@@ -98,7 +98,6 @@
 			<option value="20">20</option>
 			<option value="30">30</option>
 			<option value="50">50</option>
-			<option value="0">All</option>
 		</select>
 		<label>Sort</label>
 		<select>
@@ -116,7 +115,7 @@
 			<option value="6">접속사(conjuction)</option>
 			<option value="7">감탄사(interjection)</option>
 		</select>
-		<input type="text" ng-model="searchWord">
+		<input type="text" placeholder="Search" ng-model="searchWord">
 	</div>
 
 	<!-- Word List Table -->
@@ -154,10 +153,10 @@
 				<td></td>
 			</tr> -->
 
-			<tr ng-repeat="word in currentList | filter: searchWord track by $index">
+			<tr ng-repeat="word in pageList | filter: searchWord track by $index">
 				<td>{{word.index}}</td>
 				<td>{{word.word}}</td>
-				<td>{{word.part}}</td>
+				<td>{{word.partName}}</td>
 				<td>{{word.definition}}</td>
 				<td><a ng-click="showEdit = 1">Edit</a></td>
 			</tr>
