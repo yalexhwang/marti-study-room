@@ -41,7 +41,7 @@ function createFullList(data, convertPartName, convertLngName) {
 		var word = data[i];
 		word.partName = convertPartName(word.part);
 		word.language = convertLngName(word.language);
-		word.index = i + 1;
+		word.rootIndex = i + 1;
 		arr.push(word);
 	}
 	return arr;
@@ -53,7 +53,7 @@ function createCurrentList(fullList, categoryNum) {
 	for (var i = 0; i < fullList.length; i++) {
 		if (categoryNum === "all") {
 			var word = fullList[i];
-			word.index = i + 1;
+			word.index = word.rootIndex;
 			arr.push(word);
 		} else if (fullList[i].part == categoryNum) {
 			var word = fullList[i];
@@ -100,6 +100,17 @@ martiApp.service('WordBankService', function($http, $q) {
 		return def.promise;
 	};
 
+	this.remove = function(id) {
+		var def = $q.defer();
+		$http.post(url + '/remove', id)
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
+
 	this.getFullList = function() {
 		var def = $q.defer();
 		$http.post(url + '/get_full_list')
@@ -125,6 +136,10 @@ martiApp.config(function($routeProvider) {
 	.when('/quiz', {
 		controller: 'quizCtrl',
 		templateUrl: 'templates/quiz.html'
+	})
+	.when('/signin', {
+		controller: 'signinCtrl',
+		templateUrl: 'templates/signin.html'
 	})
 	.otherwise({
 		redirectTo: '/'

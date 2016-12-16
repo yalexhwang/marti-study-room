@@ -10,13 +10,14 @@
 	<script src="scripts.js"></script>
 	<script src="ctrls/mainCtrl.js"></script>
 	<script src="ctrls/wordbankCtrl.js"></script>
+	<script src="ctrls/signinCtrl.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="compass/css/styles.css">
 </head>
 <body ng-controller="martiCtrl">
 	<div id="navigation">
-		<div class="sub-nav" id="signin-bar"><div id="signin"><a>Sign In</a></div></div>
+		<div class="sub-nav" id="signin-bar"><div id="signin"><a ng-href="#/signin">Sign In</a></div></div>
 		<div class="sub-nav" id="title-bar"><div id="title">Marti's Study Room</div></div>
 		<div class="sub-nav" id="menu-bar">
 			<div><a ng-href="#/">Review</a></div>

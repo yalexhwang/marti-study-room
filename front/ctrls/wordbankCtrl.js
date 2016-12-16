@@ -1,4 +1,7 @@
-martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBankService) {
+martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $location, WordBankService) {
+	if ($rootScope.signedIn === 0) {
+		$location.path('/signin');
+	}
 	//Initial Setting - forms
 	$scope.showFormNotif = 0;
 	$scope.showKOR = 1;
@@ -47,7 +50,7 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBa
 					$scope.addedWord = rspns.data.doc;
 					$scope.KOR = {};
 				} else {
-						$scope.failMessage = "Oops, Someting wentwrong. Please try again.";
+					$scope.failMessage = "Oops, Someting wentwrong. Please try again.";
 					$scope.showFormNotif = 1;
 					$scope.showFail = 1;
 					$scope.showSuccess = 0;
@@ -83,26 +86,22 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBa
 	// };
 
 	$scope.updateFullList = function() {
-		$rootScope.fullList = [];
 		WordBankService.getFullList()
 		.then(function success(rspns) {
+			console.log(rspns);
+			console.log($scope.currentPage);
 			$rootScope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-
-			$scope.currentPage = Math.ceil($rootScope.fullList.length / $scope.wordCount); 
-			$scope.currentList = createCurrentList($rootScope.fullList, $scope.currentPage, $scope.wordCount);
-			$scope.pages = calculatePageView($rootScope.fullList.length, $scope.wordCount);
+			$scope.currentList = createCurrentList($rootScope.fullList, 'all');
+			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+			$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
 		}, function fail(rspns) {
 			console.log(rspns);
 		});
 	};
 
 	//Default Setting for Word List
-	// $rootScope.fullList = [];
-	// $scope.subList = [];
-	// $scope.currentList = [];
 	$scope.currentPage = 1;
 	$scope.wordCount = 10;
-	// $scope.pages = [];
 
 	WordBankService.getFullList()
 	.then(function success(rspns) {
@@ -114,10 +113,10 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBa
 		$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 		//Create the page array
 		$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
-		console.log('rootScope.fullList------------');
 		console.log($rootScope.fullList);
-		console.log('scope.currentList------------');
 		console.log($scope.currentList);
+		console.log($scope.pageList);
+		console.log('currentPage: ' + $scope.currentPage);
 	}, function fail(rspns) {
 		console.log(rspns);
 	});
@@ -156,6 +155,28 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBa
 		// }
 	};
 
+	//Remove a word
+	$scope.removeWord = function(index) {
+		var id = {id: $scope.pageList[index]._id};
+		var rootIndex = $scope.pageList[index].rootIndex;
+		WordBankService.remove(id)
+		.then(function success(rspns) {
+			WordBankService.getFullList()
+			.then(function success(rspns) {
+				console.log(rspns);
+				console.log($scope.currentPage);
+				$rootScope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
+				$scope.currentList = createCurrentList($rootScope.fullList, 'all');
+				$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+				$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
+			}, function fail(rspns) {
+				console.log(rspns);
+			});
+		}, function fail(rspns) {
+			console.log(rspns);
+		});
+	};
+
 	//Change page
 	$scope.previousPage = function() {
 		if ($scope.currentPage > 1) {
@@ -174,7 +195,9 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, WordBa
 	};
 	$scope.goToPage = function(page) {
 		console.log('Go to page ' + page);
+		$scope.currentPage = page;
 		$scope.pageList = createPageList($scope.currentList, page, $scope.wordCount);
+
 	}
 
 });

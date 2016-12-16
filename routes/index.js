@@ -5,14 +5,16 @@ var mongoUrl = 'mongodb://localhost:27017/marti';
 var Word = require('../models/word');
 mongoose.connect(mongoUrl);
 
+router.post('/signin', function(req, res, next) {
+
+});
+
 router.post('/add', function(req, res, next) {
 	console.log('/add');
-	console.log(req.body);
 	var lng = req.body.language;
 	var word = req.body.word;
 	var part = Number(req.body.part);
 	var def = req.body.definition;
-
 	var newWord = new Word({
 		language: lng,
 		part: part,
@@ -26,10 +28,8 @@ router.post('/add', function(req, res, next) {
 			console.log(err);
 		} else {
 			if (result) {
-				console.log('result:');
 				console.log(result);
 			} else {
-				console.log('saving the new word');
 				newWord.save(function(err, saved, status) {
 					if (err) {
 						console.log('line25: error in saving a new word');
@@ -48,8 +48,26 @@ router.post('/add', function(req, res, next) {
 			}
 		}
 	});
+});
 
-	
+router.post('/remove', function(req, res, next) {
+	console.log('/remove');
+	var id = req.body.id;
+	console.log(id);
+	Word.remove({_id: id}, function(err) {
+		if (err) {
+			console.log('line 59: error in removing a word');
+			console.log(err);
+			res.json({
+				passFail: 0,
+				doc: err
+			})
+		} else {
+			res.json({
+				passFail: 1
+			});
+		}
+	});
 });
 
 router.post('/get_full_list', function(req, res, next) {

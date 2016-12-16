@@ -158,9 +158,8 @@
 				<td>{{word.word}}</td>
 				<td>{{word.partName}}</td>
 				<td>{{word.definition}}</td>
-				<td><a ng-click="showEdit = 1">Edit</a></td>
+				<td><a ng-click="removeWord($index)"><span class="glyphicon glyphicon-remove"></span></a></td>
 			</tr>
-			<div ng-show="showEdit">dd</div>
 		</tbody>
 	</table>
 	<!-- Pagination -->
