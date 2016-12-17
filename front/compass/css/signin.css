@@ -1,9 +1,0 @@
-/* line 1, ../sass/signin.scss */
-#signin-wrapper {
-  min-width: 200px;
-  margin: auto;
-}
-/* line 4, ../sass/signin.scss */
-#signin-wrapper #signin-notification {
-  margin-top: 25px;
-}

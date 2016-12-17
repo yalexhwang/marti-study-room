@@ -1,1 +1,0 @@
-# marti-study-room
