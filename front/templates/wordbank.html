@@ -91,31 +91,35 @@
 <div id="table-wrapper">
 	<!-- Table View Options -->
 	<div id="view-options">
-		<label>Per Page</label>
-		<select ng-change="updateNumPerPage()" ng-model="wordCount">
-			<option value="10" ng-selected="1">10</option>
-			<option value="15">15</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option value="50">50</option>
-		</select>
-		<label>Sort</label>
+		<div class="option">
+			<!-- <label>Per Page</label> -->
+			<select ng-change="updateNumPerPage()" ng-model="wordCount">
+				<option value="10" ng-selected="1">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+			</select>
+		<!-- <label>Sort</label>
 		<select>
 			<option value="0"></option>
-		</select>
-		<label>Show</label>
-		<select ng-change="updatePartCategory()" ng-model="partCategory">
-			<option value="all" ng-selected="1">All</option>
-			<option value="0">명사(noun)</option>
-			<option value="1">대명사(pronoun)</option>
-			<option value="2">동사(verb)</option>
-			<option value="3">형용사(adjective)</option>
-			<option value="4">부사(adverb)</option>
-			<option value="5">전치사(proposition)</option>
-			<option value="6">접속사(conjuction)</option>
-			<option value="7">감탄사(interjection)</option>
-		</select>
-		<input type="text" placeholder="Search" ng-model="searchWord">
+		</select> -->
+			<!-- <label>Show</label> -->
+			<select ng-change="updatePartCategory()" ng-model="partCategory">
+				<option value="all" ng-selected="1">All</option>
+				<option value="0">명사(noun)</option>
+				<option value="1">대명사(pronoun)</option>
+				<option value="2">동사(verb)</option>
+				<option value="3">형용사(adjective)</option>
+				<option value="4">부사(adverb)</option>
+				<option value="5">전치사(proposition)</option>
+				<option value="6">접속사(conjuction)</option>
+				<option value="7">감탄사(interjection)</option>
+			</select>
+		</div>
+		<div class="option">
+			<input type="text" placeholder="Search" ng-model="searchWord">
+		</div>
 	</div>
 
 	<!-- Word List Table -->

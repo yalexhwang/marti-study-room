@@ -1,2 +1,52 @@
+<div id="home-wrapper">
 
+	<div class="view-options">
+		<div class="option">
+			<select ng-change="updatePartCategory()" ng-model="partCategory">
+				<option value="all" ng-selected="1">All</option>
+				<option value="0">명사(noun)</option>
+				<option value="1">대명사(pronoun)</option>
+				<option value="2">동사(verb)</option>
+				<option value="3">형용사(adjective)</option>
+				<option value="4">부사(adverb)</option>
+				<option value="5">전치사(proposition)</option>
+				<option value="6">접속사(conjuction)</option>
+				<option value="7">감탄사(interjection)</option>
+			</select>
+		</div>
+		<div class="option">
+			<button type="button" class="btn btn-default btn-xs" ng-click="shuffle()">Shuffle</button>
+			<button type="button" class="btn btn-default btn-xs" ng-click="unshuffle()">Original</button>
+		</div>
+	</div>
 
+	<div class="card-wrapper">
+		<div class="btn-wrapper">
+			<button type="button" class="btn btn-default btn-sm" ng-click="prev()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+		</div>
+		<div class="card">
+			<div ng-class="{'cover': wordCover}" class="card-word">{{word.word}}</div>
+			<div class="card-page">{{word.index}} / {{totalPage}}</div>
+			<div ng-class="{'cover': partCover}" class="card-part">{{word.partName}}</div>
+			<div ng-class="{'cover': definitionCover}" class="card-definition">{{word.definition}}</div>
+		</div>
+		<div class="btn-wrapper">
+			<button type="button" class="btn btn-default btn-sm" ng-click="next()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		</div>
+	</div>
+	
+	<div class="view-options">
+		<div class="checkbox" id="checkbox-group">
+			<label>
+				<input type="checkbox" ng-model="wordCover"> Hide Word
+			</label>
+			<label>
+				<input type="checkbox" ng-model="partCover"> Part of Speech
+			</label>
+			<label>
+				<input type="checkbox" ng-model="definitionCover"> Definition
+			</label>
+		</div>
+	</div>
+
+</div>
