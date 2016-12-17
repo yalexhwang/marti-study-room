@@ -1,0 +1,183 @@
+<div id="form-wrapper">
+<!-- 	<div id="form-title">
+		{{formTitle}} 
+		<span>
+			<a ng-click="toggleForm()">{{switchLng}}</a>
+		</span>
+	</div> -->
+
+	<div id="KOR-form" ng-show="showKOR">
+		<form class="form-horizontal" ng-submit="addKOR()">
+			<div class="form-group">
+				<label class="control-label col-sm-3">Word</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" placeholder="(Korean)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.word" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Part of Speech</label>
+				<div class="col-sm-9">
+					<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.part" required>
+						<option value="0">명사(noun)</option>
+						<option value="1">대명사(pronoun)</option>
+						<option value="2">동사(verb)</option>
+						<option value="3">형용사(adjective)</option>
+						<option value="4">부사(adverb)</option>
+						<option value="5">전치사(proposition)</option>
+						<option value="6">접속사(conjuction)</option>
+						<option value="7">감탄사(interjection)</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Definition</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" placeholder="(ex. to eat)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.definition" required>
+				</div>
+			</div>
+			<div class="col-sm-offset-3">
+				<button type="submit" class="btn btn-default">Add</button>
+				<button type="button" class="btn btn-default" ng-show="showSuccess" ng-click="updateFullList()">Update List</button>
+			</div>
+		</form>
+	</div>
+
+	<div id="ENG-form" ng-hide="showKOR">
+		<form ng-submit="addENG()">
+			<div class="form-group">
+				<label class="control-label col-sm-3">Word</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" placeholder="(English)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.word" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Part of Speech</label>
+				<div class="col-sm-9">
+					<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.part" required>
+						<option value="0">명사(noun)</option>
+						<option value="1">대명사(pronoun)</option>
+						<option value="2">동사(verb)</option>
+						<option value="3">형용사(adjective)</option>
+						<option value="4">부사(adverb)</option>
+						<option value="5">전치사(proposition)</option>
+						<option value="6">접속사(conjuction)</option>
+						<option value="7">감탄사(interjection)</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Definition</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.definition" required>
+				</div>
+			</div>
+			<div class="col-sm-offset-3">
+				<button type="submit" class="btn btn-default">Add</button>
+			</div>
+		</form>
+	</div>
+
+	<div id="form-notification" ng-show="showFormNotif">
+		<div class="alert alert-success" ng-show="showSuccess">
+			The following word has been added: {{addedWord.word}}
+		</div>
+		<div class="alert alert-danger" ng-show="showFail">
+			{{failMessage}}
+		</div>
+	</div>
+</div>
+
+
+<div id="table-wrapper">
+	<!-- Table View Options -->
+	<div id="view-options">
+		<div class="option">
+			<!-- <label>Per Page</label> -->
+			<select ng-change="updateNumPerPage()" ng-model="wordCount">
+				<option value="10" ng-selected="1">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+			</select>
+		<!-- <label>Sort</label>
+		<select>
+			<option value="0"></option>
+		</select> -->
+			<!-- <label>Show</label> -->
+			<select ng-change="updatePartCategory()" ng-model="partCategory">
+				<option value="all" ng-selected="1">All</option>
+				<option value="0">명사(noun)</option>
+				<option value="1">대명사(pronoun)</option>
+				<option value="2">동사(verb)</option>
+				<option value="3">형용사(adjective)</option>
+				<option value="4">부사(adverb)</option>
+				<option value="5">전치사(proposition)</option>
+				<option value="6">접속사(conjuction)</option>
+				<option value="7">감탄사(interjection)</option>
+			</select>
+		</div>
+		<div class="option">
+			<input type="text" placeholder="Search" ng-model="searchWord">
+		</div>
+	</div>
+
+	<!-- Word List Table -->
+	<table class="table" id="full-list">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Word</th>
+				<th>Part of Speech</th>
+				<th>Definition</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+	<!-- 		<tr>
+				<td>Add New</td>
+				<td>
+					<input type="text" class="form-control" placeholder="(English)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.word" required>
+				</td>
+				<td>
+					<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.part" required>
+						<option value="0">명사(noun)</option>
+						<option value="1">대명사(pronoun)</option>
+						<option value="2">동사(verb)</option>
+						<option value="3">형용사(adjective)</option>
+						<option value="4">부사(adverb)</option>
+						<option value="5">전치사(proposition)</option>
+						<option value="6">접속사(conjuction)</option>
+						<option value="7">감탄사(interjection)</option>
+					</select>
+				</td>
+				<td>
+					<input type="text" class="form-control" placeholder="(ex. to eat)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.definition" required>
+				</td>
+				<td></td>
+			</tr> -->
+
+			<tr ng-repeat="word in pageList | filter: searchWord track by $index">
+				<td>{{word.index}}</td>
+				<td>{{word.word}}</td>
+				<td>{{word.partName}}</td>
+				<td>{{word.definition}}</td>
+				<td><a ng-click="removeWord($index)"><span class="glyphicon glyphicon-remove"></span></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- Pagination -->
+	<nav aria-label="table pagination" class="text-center">
+	  <ul class="pagination">
+	    <li>
+	      <a ng-click="previousPage()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+	    </li>
+	    <li ng-repeat="num in pages">
+	    	<a ng-click="goToPage(num)">{{num}}</a>
+	    </li>
+	    <li>
+	      <a ng-click="nextPage()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+	    </li>
+	  </ul>
+	</nav>
+</div>
