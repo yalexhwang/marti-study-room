@@ -1,5 +1,91 @@
-var martiApp = angular.module('martiApp', ['ngRoute']);
+var martiApp = angular.module('martiApp', ['ngRoute', 'ngCookies']);
 var url = "http://localhost:3000";
+
+martiApp.run(function($rootScope, $http, $cookies, $location) {
+	$rootScope.$on('$locationChangeStart', function(event, next, current) {
+		console.log('rootScope.signedIn: ' + $rootScope.signedIn);
+		var user = $cookies.getObject('user');
+		if (user !== undefined) {
+			$http.post(url + '/verify', user)
+			.then(function success(rspns) {
+				console.log(rspns);
+				if (rspns.data.passFail) {
+					$rootScope.signedIn = 1;
+				} else {
+					$rootScope.signedIn = 0;
+				}
+			}, function fail(rspns) {
+				console.log(rspns);
+				$rootScope.signedIn = 0;
+			});
+		} else {
+			$rootScope.signedIn = 0;
+		}
+	});
+});
+
+//Router setting
+martiApp.config(function($routeProvider) {
+	$routeProvider.when('/', {
+		controller: 'martiCtrl',
+		templateUrl: 'templates/home.html'
+	})
+	.when('/quiz', {
+		controller: 'quizCtrl',
+		templateUrl: 'templates/quiz.html'
+	})
+	.when('/wordbank', {
+		controller: 'wordbankCtrl',
+		templateUrl: 'templates/wordbank.html'
+	})
+	.when('/signin', {
+		controller: 'signinCtrl',
+		templateUrl: 'templates/signin.html'
+	})
+	.when('/mypage', {
+		controller: 'mypageCtrl',
+		templateUrl: 'templates/mypage.html'
+	})
+	.otherwise({
+		redirectTo: '/'
+	});
+});
+
+//Services
+martiApp.service('WordBankService', function($http, $q) {
+	this.add = function(newWord) {
+		var def = $q.defer();
+		$http.post(url + '/add', newWord)
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
+
+	this.remove = function(id) {
+		var def = $q.defer();
+		$http.post(url + '/remove', id)
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
+
+	this.getFullList = function() {
+		var def = $q.defer();
+		$http.post(url + '/get_full_list')
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
+});
 
 //Reusable functions 
 function convertPartName(num) {
@@ -87,64 +173,9 @@ function createPageList(currentList, currentPage, numPerPage) {
 	return arr;
 }
 
-//Services
-martiApp.service('WordBankService', function($http, $q) {
-	this.add = function(newWord) {
-		var def = $q.defer();
-		$http.post(url + '/add', newWord)
-		.then(function success(rspns) {
-			def.resolve(rspns);
-		}, function fail(rspns) {
-			def.reject(rspns);
-		});
-		return def.promise;
-	};
 
-	this.remove = function(id) {
-		var def = $q.defer();
-		$http.post(url + '/remove', id)
-		.then(function success(rspns) {
-			def.resolve(rspns);
-		}, function fail(rspns) {
-			def.reject(rspns);
-		});
-		return def.promise;
-	};
 
-	this.getFullList = function() {
-		var def = $q.defer();
-		$http.post(url + '/get_full_list')
-		.then(function success(rspns) {
-			def.resolve(rspns);
-		}, function fail(rspns) {
-			def.reject(rspns);
-		});
-		return def.promise;
-	};
-});
 
-//Router setting
-martiApp.config(function($routeProvider) {
-	$routeProvider.when('/', {
-		controller: 'martiCtrl',
-		templateUrl: 'templates/home.html'
-	})
-	.when('/wordbank', {
-		controller: 'wordbankCtrl',
-		templateUrl: 'templates/wordbank.html'
-	})
-	.when('/quiz', {
-		controller: 'quizCtrl',
-		templateUrl: 'templates/quiz.html'
-	})
-	.when('/signin', {
-		controller: 'signinCtrl',
-		templateUrl: 'templates/signin.html'
-	})
-	.otherwise({
-		redirectTo: '/'
-	});
-});
 
 
 

@@ -62,6 +62,10 @@
   min-width: 200px;
   margin: auto;
 }
+/* line 4, ../sass/signin.scss */
+#signin-wrapper #signin-notification {
+  margin-top: 25px;
+}
 
 /* line 5, ../sass/styles.scss */
 body {
@@ -92,13 +96,13 @@ body #navigation .sub-nav {
   flex: 100%;
 }
 /* line 24, ../sass/styles.scss */
-body #navigation #signin-bar {
+body #navigation #signin-bar, body #navigation #marti-bar {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
 }
 /* line 28, ../sass/styles.scss */
-body #navigation #signin-bar #signin {
+body #navigation #signin-bar #signin, body #navigation #signin-bar #welcome, body #navigation #marti-bar #signin, body #navigation #marti-bar #welcome {
   font-size: 12px;
   padding: 5px;
 }
