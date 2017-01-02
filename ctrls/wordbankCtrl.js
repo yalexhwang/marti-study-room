@@ -184,8 +184,7 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 			console.log('currentPage: ' + $scope.currentPage);
 			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 		}
-
-	}
+	};
 	$scope.nextPage = function() {
 		if ($scope.currentPage < $scope.pages.length) {
 			$scope.currentPage++;
@@ -197,7 +196,6 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 		console.log('Go to page ' + page);
 		$scope.currentPage = page;
 		$scope.pageList = createPageList($scope.currentList, page, $scope.wordCount);
-
-	}
+	};
 
 });

@@ -1,1 +1,62 @@
-quiz
+
+<form ng-submit="startQuiz()" ng-hide="quizStarted">
+	<div class="form-group">
+		<label>Part of Speech</label>
+		<div class="checkbox" ng-model="partSelected">
+			<label>
+				<input type="checkbox" ng-model="partAll" ng-click="allSelected()"> All
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part0"> 명사(noun)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part1"> 대명사(pronoun)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part2"> 동사(verb)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part3"> 형용사(adjective)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part4"> 부사(adverb)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part5"> 전치사(proposition)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part6"> 접속사(conjuction)
+			</label>
+			<label>
+				<input type="checkbox" ng-model="part7"> 감탄사(interjection)
+			</label>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label>Number of Questions</label>
+		<select ng-model="numOfQs">
+			<option ng-selected="1">20</option>
+			<option>30</option>
+			<option>40</option>
+			<option>50</option>
+			<option>All</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label>Number of Choices</label>
+		<input type="radio" ng-model="choices4"> 4 choices
+		<input type="radio" ng-model="choices5"> 5 choices
+	</div>
+
+	<button type="submit" class="btn btn-default">Start</button>
+
+</form>
+
+<div id="quiz-wrapper" ng-show="quizStarted">
+	<div>
+		
+	</div>
+</div>
+
