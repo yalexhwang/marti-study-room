@@ -1,21 +1,21 @@
 /*
 Error: Undefined mixin 'breakpoint'.
-        on line 4 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/wordbank.scss, in `breakpoint'
-        from line 4 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/wordbank.scss
+        on line 4 of /Users/AlexH/Documents/marti-study-room/compass/sass/wordbank.scss, in `breakpoint'
+        from line 4 of /Users/AlexH/Documents/marti-study-room/compass/sass/wordbank.scss
 
 1: #form-wrapper {
-2: 	width: 100%;
+2: 	width: 95%;
 3: 	margin: 15px auto;
 4: 	@include breakpoint(320) {
 5: 		width: 90%;
 6: 	}
 7: 
-8: 	#KOR-form {
-9: 		width: 100%;
+8: 	.add-form {
+9: 		margin: auto;
 
 Backtrace:
-/Users/AlexH/Documents/marti-study-room/front/compass/sass/wordbank.scss:4:in `breakpoint'
-/Users/AlexH/Documents/marti-study-room/front/compass/sass/wordbank.scss:4
+/Users/AlexH/Documents/marti-study-room/compass/sass/wordbank.scss:4:in `breakpoint'
+/Users/AlexH/Documents/marti-study-room/compass/sass/wordbank.scss:4
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:351:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:98:in `block in with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
@@ -69,4 +69,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'breakpoint'.\A         on line 4 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/wordbank.scss, in `breakpoint'\A         from line 4 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/wordbank.scss\A \A 1: #form-wrapper {\A 2: 	width: 100%;\A 3: 	margin: 15px auto;\A 4: 	@include breakpoint(320) {\A 5: 		width: 90%;\A 6: 	}\A 7: \A 8: 	#KOR-form {\A 9: 		width: 100%;"; }
+  content: "Error: Undefined mixin 'breakpoint'.\A         on line 4 of /Users/AlexH/Documents/marti-study-room/compass/sass/wordbank.scss, in `breakpoint'\A         from line 4 of /Users/AlexH/Documents/marti-study-room/compass/sass/wordbank.scss\A \A 1: #form-wrapper {\A 2: 	width: 95%;\A 3: 	margin: 15px auto;\A 4: 	@include breakpoint(320) {\A 5: 		width: 90%;\A 6: 	}\A 7: \A 8: 	.add-form {\A 9: 		margin: auto;"; }

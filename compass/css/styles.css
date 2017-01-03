@@ -1,95 +1,93 @@
-/* line 1, ../sass/review.scss */
-#home-wrapper {
-  flex: 100%;
-  display: flex;
-  flex-flow: row wrap;
-}
-
-/* line 7, ../sass/review.scss */
-.view-options {
+/* line 1, ../sass/home.scss */
+.options-wrapper {
   flex: 90%;
   margin: auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  align-items: flex-end;
 }
-/* line 14, ../sass/review.scss */
-.view-options .option {
+/* line 8, ../sass/home.scss */
+.options-wrapper .option {
   margin: 0px 7px;
 }
 
-/* line 19, ../sass/review.scss */
-.card-wrapper {
-  flex: 100% auto;
+/* line 13, ../sass/home.scss */
+#card-wrapper {
   margin: 20px auto;
+  width: 100%;
+  max-width: 614px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
 }
 @media (min-width: 320px) {
-  /* line 19, ../sass/review.scss */
-  .card-wrapper {
+  /* line 13, ../sass/home.scss */
+  #card-wrapper {
     width: 90%;
   }
 }
-@media (min-width: 768px) {
-  /* line 19, ../sass/review.scss */
-  .card-wrapper {
-    width: 614px;
-  }
-}
-/* line 32, ../sass/review.scss */
-.card-wrapper .btn-wrapper {
+/* line 25, ../sass/home.scss */
+#card-wrapper .button {
   flex: 10%;
   text-align: center;
 }
-/* line 36, ../sass/review.scss */
-.card-wrapper .card {
+/* line 30, ../sass/home.scss */
+#card-wrapper #card {
   flex: 70%;
-  display: flex;
-  flex-flow: row wrap;
-  background-color: #f5f5f5;
-  border-radius: 5px;
   margin: 0px 5px;
   padding: 10px 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: row wrap;
 }
-/* line 44, ../sass/review.scss */
-.card-wrapper .card .cover {
-  color: transparent;
-}
-/* line 47, ../sass/review.scss */
-.card-wrapper .card .cover:hover {
-  color: black;
-}
-/* line 50, ../sass/review.scss */
-.card-wrapper .card .card-page {
+/* line 39, ../sass/home.scss */
+#card-wrapper #card .card-page {
   flex: 15%;
   text-align: right;
   font-size: 11px;
 }
-/* line 55, ../sass/review.scss */
-.card-wrapper .card .card-word {
+/* line 44, ../sass/home.scss */
+#card-wrapper #card .card-word {
   flex: 80%;
   font-size: 24px;
   font-weight: bold;
 }
-/* line 60, ../sass/review.scss */
-.card-wrapper .card .card-part {
+/* line 49, ../sass/home.scss */
+#card-wrapper #card .card-part {
   flex: 100%;
   font-size: 14px;
 }
-/* line 64, ../sass/review.scss */
-.card-wrapper .card .card-definition {
+/* line 53, ../sass/home.scss */
+#card-wrapper #card .card-definition {
   flex: 100%;
-  font-size: 18px;
   margin-top: 10px;
+  font-size: 18px;
+}
+/* line 60, ../sass/home.scss */
+#card-wrapper #card .cover {
+  color: transparent;
+}
+/* line 63, ../sass/home.scss */
+#card-wrapper #card .cover:hover {
+  color: black;
+}
+
+/* line 1, ../sass/quiz.scss */
+#quiz-wrapper {
+  flex: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+/* line 6, ../sass/quiz.scss */
+#quiz-wrapper #quizOptions {
+  flex: 100%;
 }
 
 /* line 1, ../sass/wordbank.scss */
 #form-wrapper {
-  width: 100%;
+  width: 95%;
   margin: 15px auto;
 }
 @media (min-width: 320px) {
@@ -99,62 +97,101 @@
   }
 }
 /* line 8, ../sass/wordbank.scss */
-#form-wrapper #KOR-form {
+#form-wrapper .add-form {
+  margin: auto;
   width: 100%;
   max-width: 500px;
-  margin: auto;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  padding: 10px 10px;
 }
 @media (min-width: 320px) {
   /* line 8, ../sass/wordbank.scss */
-  #form-wrapper #KOR-form {
-    padding: 20px 15px;
+  #form-wrapper .add-form {
+    width: 90%;
   }
 }
-/* line 21, ../sass/wordbank.scss */
-#form-wrapper #form-notification {
-  width: 90%;
-  max-width: 400px;
+/* line 17, ../sass/wordbank.scss */
+#form-wrapper #notif-form {
   margin: 15px auto 0px auto;
+  width: 100%;
+  max-width: 400px;
+}
+@media (min-width: 320px) {
+  /* line 17, ../sass/wordbank.scss */
+  #form-wrapper #notif-form {
+    width: 90%;
+  }
+}
+/* line 25, ../sass/wordbank.scss */
+#form-wrapper #notif-form #added {
+  font-size: 18px;
+  font-weight: 500;
 }
 
-/* line 28, ../sass/wordbank.scss */
+/* line 32, ../sass/wordbank.scss */
 #table-wrapper {
-  width: 100%;
+  width: 95%;
   margin: 20px auto 0px auto;
 }
 @media (min-width: 480px) {
-  /* line 28, ../sass/wordbank.scss */
+  /* line 32, ../sass/wordbank.scss */
   #table-wrapper {
-    padding: 0px 20px;
+    width: 90%;
   }
 }
-@media (min-width: 992px) {
-  /* line 28, ../sass/wordbank.scss */
+@media (min-width: 768px) {
+  /* line 32, ../sass/wordbank.scss */
   #table-wrapper {
-    padding: 0px 30px;
+    width: 80%;
   }
 }
-/* line 38, ../sass/wordbank.scss */
-#table-wrapper #view-options {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-/* line 43, ../sass/wordbank.scss */
-#table-wrapper #view-options .option {
+/* line 42, ../sass/wordbank.scss */
+#table-wrapper #options-wrapper {
+  flex: 100%;
   margin: 0px 5px;
+  display: flex;
+  flex-flow: row wrap;
 }
-/* line 45, ../sass/wordbank.scss */
-#table-wrapper #view-options .option select {
-  margin-right: 5px;
+/* line 47, ../sass/wordbank.scss */
+#table-wrapper #options-wrapper .option {
+  margin: 0px 5px 5px 0px;
 }
-/* line 51, ../sass/wordbank.scss */
-#table-wrapper #full-list {
+/* line 50, ../sass/wordbank.scss */
+#table-wrapper #options-wrapper #wordCount {
+  width: 45px;
+}
+/* line 53, ../sass/wordbank.scss */
+#table-wrapper #options-wrapper #wordPart {
+  width: 60px;
+}
+@media (min-width: 480px) {
+  /* line 53, ../sass/wordbank.scss */
+  #table-wrapper #options-wrapper #wordPart {
+    width: 80px;
+  }
+}
+/* line 59, ../sass/wordbank.scss */
+#table-wrapper #options-wrapper #wordSearch {
+  width: 110px;
+}
+@media (min-width: 480px) {
+  /* line 59, ../sass/wordbank.scss */
+  #table-wrapper #options-wrapper #wordSearch {
+    width: 130px;
+  }
+}
+/* line 67, ../sass/wordbank.scss */
+#table-wrapper #list {
   margin-bottom: 0px;
+  font-size: 13px;
+}
+@media (min-width: 320px) {
+  /* line 67, ../sass/wordbank.scss */
+  #table-wrapper #list {
+    font-size: 14px;
+  }
+}
+/* line 73, ../sass/wordbank.scss */
+#table-wrapper #list .col2 {
+  min-width: 80px;
 }
 
 /* line 1, ../sass/signin.scss */
@@ -167,93 +204,112 @@
   margin-top: 25px;
 }
 
-/* line 6, ../sass/styles.scss */
+/* line 9, ../sass/styles.scss */
 body {
-  display: flex;
-  flex-flow: row wrap;
   min-width: 320px;
   background-color: #d8bfd8;
 }
-/* line 11, ../sass/styles.scss */
+/* line 13, ../sass/styles.scss */
 body #navigation {
-  width: 100%;
   margin: auto;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
   display: flex;
   flex-flow: row wrap;
 }
 @media (min-width: 768px) {
-  /* line 11, ../sass/styles.scss */
+  /* line 13, ../sass/styles.scss */
   body #navigation {
-    flex: 90%;
+    width: 90%;
   }
 }
 @media (min-width: 992px) {
-  /* line 11, ../sass/styles.scss */
+  /* line 13, ../sass/styles.scss */
   body #navigation {
     width: 80%;
   }
 }
-/* line 22, ../sass/styles.scss */
+/* line 25, ../sass/styles.scss */
 body #navigation a {
   text-decoration: none;
 }
-/* line 25, ../sass/styles.scss */
-body #navigation .sub-nav {
+/* line 29, ../sass/styles.scss */
+body #navigation .nav-row {
   flex: 100%;
 }
-/* line 28, ../sass/styles.scss */
-body #navigation #signin-bar, body #navigation #marti-bar {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
+/* line 33, ../sass/styles.scss */
+body #navigation .nav-signin {
+  text-align: right;
 }
-/* line 32, ../sass/styles.scss */
-body #navigation #signin-bar #signin, body #navigation #signin-bar #welcome, body #navigation #marti-bar #signin, body #navigation #marti-bar #welcome {
+/* line 35, ../sass/styles.scss */
+body #navigation .nav-signin a {
   font-size: 11px;
-  font-family: "Poppins", sans-serif;
   padding: 5px;
   margin-right: 10px;
 }
-/* line 40, ../sass/styles.scss */
-body #navigation #title-bar #title {
-  font-size: 32px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
+/* line 42, ../sass/styles.scss */
+body #navigation #title {
   text-align: center;
+  font-weight: 500;
+  font-size: 26px;
 }
-/* line 47, ../sass/styles.scss */
-body #navigation #menu-bar {
+@media (min-width: 480px) {
+  /* line 42, ../sass/styles.scss */
+  body #navigation #title {
+    font-size: 32px;
+  }
+}
+/* line 51, ../sass/styles.scss */
+body #navigation #menu {
+  margin: 20px auto 5px auto;
+  width: 100%;
   max-width: 480px;
-  margin: 20px auto 10px auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  font-family: "Poppins", sans-serif;
-}
-/* line 57, ../sass/styles.scss */
-body #content {
-  width: 100%;
-  margin: 0px auto 20px auto;
-  padding: 20px 5px;
-  display: flex;
-  flex-flow: row wrap;
-  background-color: white;
-  border-radius: 7px;
 }
 @media (min-width: 320px) {
-  /* line 57, ../sass/styles.scss */
-  body #content {
+  /* line 51, ../sass/styles.scss */
+  body #navigation #menu {
     width: 95%;
   }
 }
 @media (min-width: 480px) {
-  /* line 57, ../sass/styles.scss */
+  /* line 51, ../sass/styles.scss */
+  body #navigation #menu {
+    width: 80%;
+  }
+}
+@media (min-width: 992px) {
+  /* line 51, ../sass/styles.scss */
+  body #navigation #menu {
+    width: 70%;
+  }
+}
+/* line 70, ../sass/styles.scss */
+body #content {
+  margin: 0px auto 20px auto;
+  padding: 20px 5px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-flow: row wrap;
+}
+@media (min-width: 320px) {
+  /* line 70, ../sass/styles.scss */
+  body #content {
+    width: 95%;
+    border-radius: 7px;
+  }
+}
+@media (min-width: 480px) {
+  /* line 70, ../sass/styles.scss */
   body #content {
     width: 80%;
   }
 }
 @media (min-width: 992px) {
-  /* line 57, ../sass/styles.scss */
+  /* line 70, ../sass/styles.scss */
   body #content {
     width: 70%;
   }

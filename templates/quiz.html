@@ -1,5 +1,29 @@
+<div id="quiz-wrapper">
+	<h4>Are you ready?</h4>
+	<table id="quizOptions">
+		<tr>
+			<td>Total Questions </td>
+			<td>{{quizOption1}}</td>
+		</tr>
+		<tr>
+			<td>Part of Speech </td>
+			<td>{{quizOption2}}</td>
+		</tr>
+		<tr>
+			<td>Multiple Choices </td>
+			<td>{{quizOption3}}</td>
+		</tr>
+		<tr>
+			<td>Timed </td>
+			<td>{{quizOption4}}</td>
+		</tr>
+	</table>
+	<button type="button" class="btn btn-default">Start</button>
 
-<form ng-submit="startQuiz()" ng-hide="quizStarted">
+</div>
+
+
+<!-- <form ng-submit="startQuiz()" ng-hide="quizStarted">
 	<div class="form-group">
 		<label>Part of Speech</label>
 		<div class="checkbox" ng-model="partSelected">
@@ -52,9 +76,9 @@
 
 	<button type="submit" class="btn btn-default">Start</button>
 
-</form>
+</form> -->
 
-<div id="quiz-wrapper" ng-show="quizStarted">
+<div ng-show="quizStarted">
 	<div>
 		
 	</div>

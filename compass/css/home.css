@@ -1,23 +1,23 @@
 /*
 Error: Undefined mixin 'breakpoint'.
-        on line 26 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/review.scss, in `breakpoint'
-        from line 26 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/review.scss
+        on line 17 of /Users/AlexH/Documents/marti-study-room/compass/sass/home.scss, in `breakpoint'
+        from line 17 of /Users/AlexH/Documents/marti-study-room/compass/sass/home.scss
 
-21: 	margin: 20px auto;
-22: 	display: flex;
-23: 	flex-flow: row wrap;
-24: 	justify-content: space-between;
-25: 	align-items: center;
-26: 	@include breakpoint(320) {
-27: 		width: 90%;
-28: 	}
-29: 	@include breakpoint(768) {
-30: 		width: 614px;
-31: 	}
+12: 
+13: #card-wrapper {
+14: 	margin: 20px auto;
+15: 	width: 100%;
+16: 	max-width: 614px;
+17: 	@include breakpoint(320) {
+18: 		width: 90%;
+19: 	}
+20: 	display: flex;
+21: 	flex-flow: row wrap;
+22: 	justify-content: space-between;
 
 Backtrace:
-/Users/AlexH/Documents/marti-study-room/front/compass/sass/review.scss:26:in `breakpoint'
-/Users/AlexH/Documents/marti-study-room/front/compass/sass/review.scss:26
+/Users/AlexH/Documents/marti-study-room/compass/sass/home.scss:17:in `breakpoint'
+/Users/AlexH/Documents/marti-study-room/compass/sass/home.scss:17
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:351:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:98:in `block in with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
@@ -71,4 +71,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'breakpoint'.\A         on line 26 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/review.scss, in `breakpoint'\A         from line 26 of /Users/AlexH/Documents/marti-study-room/front/compass/sass/review.scss\A \A 21: 	margin: 20px auto;\A 22: 	display: flex;\A 23: 	flex-flow: row wrap;\A 24: 	justify-content: space-between;\A 25: 	align-items: center;\A 26: 	@include breakpoint(320) {\A 27: 		width: 90%;\A 28: 	}\A 29: 	@include breakpoint(768) {\A 30: 		width: 614px;\A 31: 	}"; }
+  content: "Error: Undefined mixin 'breakpoint'.\A         on line 17 of /Users/AlexH/Documents/marti-study-room/compass/sass/home.scss, in `breakpoint'\A         from line 17 of /Users/AlexH/Documents/marti-study-room/compass/sass/home.scss\A \A 12: \A 13: #card-wrapper {\A 14: 	margin: 20px auto;\A 15: 	width: 100%;\A 16: 	max-width: 614px;\A 17: 	@include breakpoint(320) {\A 18: 		width: 90%;\A 19: 	}\A 20: 	display: flex;\A 21: 	flex-flow: row wrap;\A 22: 	justify-content: space-between;"; }

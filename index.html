@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 	<title>Marti's Study Room</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
@@ -14,24 +15,37 @@
 	<script src="ctrls/wordbankCtrl.js"></script>
 	<script src="ctrls/signinCtrl.js"></script>
 	<script src="ctrls/mypageCtrl.js"></script>
-
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600">
 	<link rel="stylesheet" href="compass/css/styles.css">
 </head>
+
 <body ng-controller="martiCtrl">
 	<div id="navigation">
-		<div class="sub-nav" id="signin-bar" ng-hide="signedIn"><div id="signin"><a ng-href="#/signin">Sign In</a></div></div>
-		<div class="sub-nav" id="marti-bar" ng-show="signedIn"><div id="welcome"><a ng-click="signout()">Sign Out</a></div></div>
-		<div class="sub-nav" id="title-bar"><div id="title">Marti's Study Room</div></div>
-		<div class="sub-nav" id="menu-bar">
-			<div><a ng-href="#/">Review</a></div>
-			<div><a ng-href="#/quiz">Quiz</a></div>
-			<div><a ng-href="#/wordbank">Word Bank</a></div>
-			<div ng-if="signedIn"><a ng-href="#/mypage">My Page</a></div>
+		<!-- Sign In & Out -->
+		<div class="nav-row nav-signin" ng-hide="signedIn">
+			<a ng-href="#/signin">Sign In</a>
+		</div>
+		<div class="nav-row nav-signin" ng-show="signedIn">
+			<a ng-click="signout()">Sign Out</a>
+		</div>
+		<!-- Title -->
+		<div class="nav-row">
+			<div id="title">Marti's Study Room</div>
+		</div>
+		<!-- Menu -->
+		<div class="nav-row">
+			<div id="menu">
+				<div><a ng-href="#/"> Review </a></div>
+				<div><a ng-href="#/quiz"> Quiz </a></div>
+				<div><a ng-href="#/wordbank"> Word Bank </a></div>
+				<div ng-if="signedIn"><a ng-href="#/mypage"> My Page </a></div>
+			</div>
 		</div>
 	</div>
-	<div id="content" ng-view></div>
+	<div id="content" ng-view>
+	<!-- main stuff -->
+	</div>
 
 </body>
 </html>

@@ -152,6 +152,15 @@ function createCurrentList(fullList, categoryNum) {
 	return arr;
 }
 
+function createSortedList(sortedList) {
+	var index = 1;
+	for (var i = 0; i < sortedList.length; i++) {
+		sortedList[i].index = index;
+		index++;
+	}
+	return sortedList;
+}
+
 function calculatePageView(totalNumOfWords, numPerPage) {
 	var lastpage;
 	if (numPerPage == 0) {
@@ -184,10 +193,24 @@ function shuffleArray(arr) {
   return arr;
 }
 
+function sortAscending(a, b) {
+	if (a.word < b.word) {
+		return -1;
+	} else if (a.word > b.word) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
 
-
-
-
-
+function sortDescending(a, b) {
+	if (a.word < b.word) {
+		return 1;
+	} else if (a.word > b.word) {
+		return -1;
+	} else {
+		return 0;
+	}
+}
 
 

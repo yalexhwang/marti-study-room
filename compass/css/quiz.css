@@ -1,0 +1,10 @@
+/* line 1, ../sass/quiz.scss */
+#quiz-wrapper {
+  flex: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+/* line 6, ../sass/quiz.scss */
+#quiz-wrapper #quizOptions {
+  flex: 100%;
+}

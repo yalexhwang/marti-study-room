@@ -3,7 +3,13 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, WordBank
 		$location.path('/signin');
 	}
 
+	//Default Settings
+	$scope.quizOption1 = 20;
+	$scope.quizOption2 = "All";
+	$scope.quizOption3 = 5;
+	$scope.quizOption4 = "No";
 	$scope.quizStarted = 0;
+
 
 	WordBankService.getFullList()
 	.then(function success(rspns) {
