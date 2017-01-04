@@ -3,26 +3,20 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 		$location.path('/signin');
 	}
 
-	//Default Setting for Word List
+	//Default Setting
+	$scope.showNotif = 0;
 	$scope.currentPage = 1;
 	$scope.wordCount = 10;
-	//Same fullList from homeCtrl
-	console.log($scope.fullList);
-	//Create the curret page list
+	$scope.sortOption1 = "A-Z";
+	$scope.sortOption2 = "Part";
+	$scope.sortOption3 = "Time Added";
+
+	//Create the curret page list using the same fullList
 	$scope.currentList = createCurrentList($scope.fullList, 'All');
-	console.log($scope.currentList);
 	//Create the curret page list
 	$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
-	console.log($scope.pageList);
 		//Create the page array
 	$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
-
-	//Default Setting for the form
-	$scope.showFormNotif = 0;
-	$scope.showKOR = 1;
-	$scope.formTitle = "Add Korean";
-	$scope.switchLng = "English";
-	$scope.sortOption = "A-Z";
 
 	//Adding Korean
 	$scope.KOR = {};
@@ -34,55 +28,27 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 			}
 		}
 		if (duplicate) {
-			$scope.failMessage = "The word you entered is already in Word Bank.";
-			$scope.showFormNotif = 1;
-			$scope.showFail = 1;
-			$scope.showSuccess = 0;
+			$scope.notifMessage = $scope.KOR.word + " is already in Word Bank.";
+			$scope.showNotif = 1;
+			$scope.KOR = {};
 		} else {
 			$scope.KOR.language = 'k';
 			WordBankService.add($scope.KOR)
 			.then(function success(rspns) {
 				if (rspns.data.passFail) {
-					$scope.showFormNotif = 1;
-					$scope.showSuccess = 1;
-					$scope.showFail = 0;
-					$scope.addedWord = rspns.data.doc;
+					$scope.showNotif = 1;
+					$scope.notifMessage = "Added!";
+					$scope.showUpdateBtn = 1;
 					$scope.KOR = {};
 				} else {
-					$scope.failMessage = "Oops, Someting wentwrong. Please try again.";
-					$scope.showFormNotif = 1;
-					$scope.showFail = 1;
-					$scope.showSuccess = 0;
+					$scope.notifMessage = "Oops, Someting went wrong. Please try again.";
+					$scope.showNotif = 1;
 				}
 			}, function fail(rspns) {
 				console.log(rspns);
 			});
 		}
 	};
-
-	//Adding English 
-	// $scope.ENG = {};
-	// $scope.addENG = function() {
-	// 	$scope.ENG.language = 'e';
-	// 	console.log($scope.ENG);
-	// 	WordBankService.add($scope.ENG)
-	// 	.then(function success(rspns) {
-	// 		console.log(rspns);
-	// 		if (rspns.data.passFail) {
-	// 			$scope.showFormNotif = 1;
-	// 			$scope.showSuccess = 1;
-	// 			$scope.showFail = 0;
-	// 			$scope.addedWord = rspns.data.doc;
-	// 			$scope.ENG = {};
-	// 		} else {
-	// 			$scope.showFormNotif = 1;
-	// 			$scope.showFail = 1;
-	// 			$scope.showSuccess = 0;
-	// 		}
-	// 	}, function fail(rspns) {
-	// 		console.log(rspns);
-	// 	});
-	// };
 
 	$scope.updateFullList = function() {
 		WordBankService.getFullList()
@@ -91,8 +57,11 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 			$scope.currentList = createCurrentList($scope.fullList, 'All');
 			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 			$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
+			$scope.showNotif = 0;
+			$scope.showUpdateBtn = 0;
 		}, function fail(rspns) {
 			console.log(rspns);
+			$scope.notifMessage = "Update failed, try again.";
 		});
 	};
 
@@ -113,15 +82,43 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 		$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
 	};
 
-	//Sort
-	$scope.sort = function() {
-		if ($scope.sortOption === "A-Z") {
-			$scope.sortOption = "Z-A";
-			$scope.currentList = createSortedList($scope.currentList.sort(sortAscending));
+	//SortOption1
+	$scope.sortByWord = function() {
+		if ($scope.sortOption1 === "A-Z") {
+			$scope.sortOption1 = "Z-A";
+			$scope.currentList = createSortedList($scope.currentList.sort(sortByWordAscending));
 			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
-		} else if ($scope.sortOption === "Z-A") {
-			$scope.sortOption = "A-Z";
-			$scope.currentList = createSortedList($scope.currentList.sort(sortDescending));
+		} else if ($scope.sortOption1 === "Z-A") {
+			$scope.sortOption1 = "A-Z";
+			$scope.currentList = createSortedList($scope.currentList.sort(sortByWordDescending));
+			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+		}
+	};
+
+	//SortOption2
+	var sortByPartOrder = 0;
+	$scope.sortByPart = function() {
+		if (sortByPartOrder === 0) {
+			sortByPartOrder = 1;
+			$scope.currentList = createSortedList($scope.currentList.sort(sortByPartAscending));
+			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+		} else {
+			sortByPartOrder = 0;
+			$scope.currentList = createSortedList($scope.currentList.sort(sortByPartDescending));
+			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+		}
+	};
+
+	//SortOption3
+	var sortByTimeAddedOrder = 0;
+	$scope.sortByTimeAdded = function() {
+		if (sortByTimeAddedOrder === 0) {
+			sortByTimeAddedOrder = 1;
+			$scope.currentList = createSortedList($scope.currentList.sort(sortByTimeAddedAscending));
+			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+		} else {
+			sortByTimeAddedOrder = 0;
+			$scope.currentList = createSortedList($scope.currentList.sort(sortByTimeAddedDescending));
 			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 		}
 	};

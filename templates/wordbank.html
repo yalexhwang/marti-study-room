@@ -1,22 +1,16 @@
 <div id="form-wrapper">
-<!-- 	<div id="form-title">
-		{{formTitle}} 
-		<span>
-			<a ng-click="toggleForm()">{{switchLng}}</a>
-		</span>
-	</div> -->
-	<div class="add-form" ng-show="showKOR">
+	<div class="add-form">
 		<form class="form-horizontal" ng-submit="addKOR()">
 			<div class="form-group">
 				<label class="control-label col-sm-3">Word</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="(Korean)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.word" required>
+					<input type="text" class="form-control" placeholder="(Korean)" ng-click="showNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.word" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-3">Part of Speech</label>
 				<div class="col-sm-9">
-					<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.part" required>
+					<select class="form-control" ng-click="showNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.part" required>
 						<option value="0">명사(noun)</option>
 						<option value="1">대명사(pronoun)</option>
 						<option value="2">동사(verb)</option>
@@ -31,58 +25,15 @@
 			<div class="form-group">
 				<label class="control-label col-sm-3">Definition</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="(ex. to eat)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.definition" required>
+					<input type="text" class="form-control" placeholder="(ex. to eat)" ng-click="showNotif = 0; showSuccess = 0; showFail = 0;" ng-model="KOR.definition" required>
 				</div>
 			</div>
 			<div class="col-sm-offset-3">
-				<button type="submit" class="btn btn-default">Add</button>
-				<button type="button" class="btn btn-default" ng-show="showSuccess" ng-click="updateFullList()">Update List</button>
+				<button type="submit" class="btn btn-default" ng-hide="showUpdateBtn">Add</button>
+				<button type="button" class="btn btn-default" ng-show="showUpdateBtn" ng-click="updateFullList()">Update List</button>
+				<span class="wordBankNotif" ng-show="showNotif">{{notifMessage}}</span>
 			</div>
 		</form>
-	</div>
-
-	<div class="add-form" ng-hide="showKOR">
-		<form ng-submit="addENG()">
-			<div class="form-group">
-				<label class="control-label col-sm-3">Word</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="(English)" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.word" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3">Part of Speech</label>
-				<div class="col-sm-9">
-					<select class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.part" required>
-						<option value="0">명사(noun)</option>
-						<option value="1">대명사(pronoun)</option>
-						<option value="2">동사(verb)</option>
-						<option value="3">형용사(adjective)</option>
-						<option value="4">부사(adverb)</option>
-						<option value="5">전치사(proposition)</option>
-						<option value="6">접속사(conjuction)</option>
-						<option value="7">감탄사(interjection)</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3">Definition</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" ng-click="showFormNotif = 0; showSuccess = 0; showFail = 0;" ng-model="ENG.definition" required>
-				</div>
-			</div>
-			<div class="col-sm-offset-3">
-				<button type="submit" class="btn btn-default">Add</button>
-			</div>
-		</form>
-	</div>
-
-	<div id="notif-form" ng-show="showFormNotif">
-		<div class="alert alert-success" ng-show="showSuccess">
-			The following word has been added: <span id="added">{{addedWord.word}}</span>
-		</div>
-		<div class="alert alert-danger" ng-show="showFail">
-			{{failMessage}}
-		</div>
 	</div>
 </div>
 
@@ -96,6 +47,7 @@
 				<option value="20">20</option>
 				<option value="30">30</option>
 				<option value="50">50</option>
+				<option value="{{fullList.length}}">All</option>
 			</select>
 		</div>
 		<div class="option" id="wordPart">
@@ -112,7 +64,13 @@
 			</select>
 		</div>
 		<div class="option">
-			<button type="button" class="btn btn-default btn-sm" ng-click="sort()">{{sortOption}}</button>
+			<button type="button" class="btn btn-default btn-sm" ng-click="sortByWord()">{{sortOption1}}</button>
+		</div>
+		<div class="option">
+			<button type="button" class="btn btn-default btn-sm" ng-click="sortByPart()">{{sortOption2}}</button>
+		</div>
+		<div class="option">
+			<button type="button" class="btn btn-default btn-sm" ng-click="sortByTimeAdded()">{{sortOption3}}</button>
 		</div>
 		<div class="option" id="wordSearch">
 			<input type="text" class="form-control input-sm" placeholder="Search" ng-model="searchWord">

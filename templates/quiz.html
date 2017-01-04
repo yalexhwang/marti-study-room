@@ -4,12 +4,12 @@
 		<table class="table table-bordered">
 			<tr>
 				<td>Total Questions</td>
-				<td><input class="form-control input-sm" type="number" min="10" max="50" placeholder="20" ng-model="quizOption1"></span></td>
+				<td><input class="form-control input-sm" type="number" min="10" max="50" placeholder="20" ng-click="showNotif = 0" ng-model="quizOption1"></span></td>
 			</tr>
 			<tr>
 				<td>Part of Speech</td>
 				<td>
-					<select class="form-control input-sm" ng-model="quizOption2">
+					<select class="form-control input-sm" ng-click="showNotif = 0" ng-model="quizOption2">
 						<option value="All" ng-selected="1">All</option>
 						<option value="0">명사 (noun)</option>
 						<option value="1">대명사 (pronoun)</option>
@@ -25,7 +25,7 @@
 			<tr>
 				<td>Multiple Choices</td>
 				<td>
-					<select class="form-control input-sm" ng-model="quizOption3">
+					<select class="form-control input-sm" ng-click="showNotif = 0" ng-model="quizOption3">
 						<option value="4" ng-selected="1">4</option>
 						<option value="5">5</option>
 					</select>
@@ -34,7 +34,7 @@
 			<tr>
 				<td>Timed</td>
 				<td>
-					<select class="form-control input-sm" ng-model="quizOption4">
+					<select class="form-control input-sm" ng-click="showNotif = 0" ng-model="quizOption4">
 						<option value="0" ng-selected="1">No</option>
 						<option value="1">Yes</option>
 					</select>
@@ -42,17 +42,29 @@
 			</tr>
 		</table>
 	</div>
+	<div class="quizNotif" ng-show="showNotif">
+		{{notifMessage}}
+	</div>
+	<div class="quizNotif" id="quizNotif-filler" ng-hide="showNotif">
+		This is a filler
+	</div>
 	<div id="btn-wrapper">
 		<button type="button" class="btn btn-default" ng-click="start()">Start</button>
 	</div>
+
 </div>
 
 <div id="quiz" ng-show="quizStarted">
+	<div id="quiz-header">
+		Quiz No. {{user.tests.length + 1}}, {{today}}
+	</div>
 	<div class="question" ng-repeat="item in quizList track by $index">
-		{{$index + 1}}. {{item.word}}
-		<input type="radio" ng-repeat="option in item.answerOptions track by $index">
-		{{option}}
-		<!-- {{option.definition}} -->
+		<div class="questionWord">{{$index + 1}}. {{item.word}}</div>
+		<div class="questionAnswers">
+			<div class="radio" ng-repeat="option in item.answerOptions track by $index">
+				<label><input type="radio" name="option"> {{option.definition}}</label>
+			</div>
+		</div>
 	</div>
 </div>
 

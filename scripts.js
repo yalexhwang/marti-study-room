@@ -192,7 +192,7 @@ function shuffleArray(arr) {
   return arr;
 }
 
-function sortAscending(a, b) {
+function sortByWordAscending(a, b) {
 	if (a.word < b.word) {
 		return -1;
 	} else if (a.word > b.word) {
@@ -202,7 +202,7 @@ function sortAscending(a, b) {
 	}
 }
 
-function sortDescending(a, b) {
+function sortByWordDescending(a, b) {
 	if (a.word < b.word) {
 		return 1;
 	} else if (a.word > b.word) {
@@ -212,4 +212,43 @@ function sortDescending(a, b) {
 	}
 }
 
+function sortByPartAscending(a, b) {
+	if (a.partName < b.partName) {
+		return -1;
+	} else if (a.partName > b.partName) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+function sortByPartDescending(a, b) {
+	if (a.partName < b.partName) {
+		return 1;
+	} else if (a.partName > b.partName) {
+		return -1;
+	} else {
+		return 0;
+	}
+}
+
+function sortByTimeAddedAscending(a, b) {
+	if (a.rootIndex < b.rootIndex) {
+		return -1;
+	} else if (a.rootIndex > b.rootIndex) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+function sortByTimeAddedDescending(a, b) {
+	if (a.rootIndex < b.rootIndex) {
+		return 1;
+	} else if (a.rootIndex > b.rootIndex) {
+		return -1;
+	} else {
+		return 0;
+	}
+}
 

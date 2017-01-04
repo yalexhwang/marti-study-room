@@ -88,23 +88,76 @@
 /* line 9, ../sass/quiz.scss */
 #quizSetting #table-wrapper h4 {
   text-align: center;
+  margin-bottom: 15px;
 }
-/* line 12, ../sass/quiz.scss */
+/* line 13, ../sass/quiz.scss */
 #quizSetting #table-wrapper table {
   margin: auto;
   width: 70%;
   max-width: 320px;
 }
-/* line 16, ../sass/quiz.scss */
+/* line 17, ../sass/quiz.scss */
 #quizSetting #table-wrapper table .glyphicon-edit {
   font-size: 12px;
   color: grey;
 }
-/* line 23, ../sass/quiz.scss */
+/* line 24, ../sass/quiz.scss */
+#quizSetting .quizNotif {
+  flex: 100%;
+  margin-top: 10px;
+  text-align: center;
+  color: #c70404;
+  font-size: 12px;
+  font-family: "Muli", sans-serif;
+}
+/* line 32, ../sass/quiz.scss */
+#quizSetting #quizNotif-filler {
+  visibility: hidden;
+}
+/* line 36, ../sass/quiz.scss */
 #quizSetting #btn-wrapper {
   flex: 100%;
-  margin-top: 15px;
+  margin: 10px auto;
   text-align: center;
+}
+
+/* line 43, ../sass/quiz.scss */
+#quiz {
+  background-color: ivory;
+  border: 1px solid green;
+  padding: 0px 15px;
+  width: 90%;
+  max-width: 520px;
+}
+@media (min-width: 320px) {
+  /* line 43, ../sass/quiz.scss */
+  #quiz {
+    margin: auto;
+  }
+}
+@media (min-width: 480px) {
+  /* line 43, ../sass/quiz.scss */
+  #quiz {
+    padding: 0px 25px;
+  }
+}
+/* line 56, ../sass/quiz.scss */
+#quiz #quiz-header {
+  margin: 15px 0px;
+}
+/* line 60, ../sass/quiz.scss */
+#quiz .question {
+  margin-bottom: 20px;
+}
+/* line 62, ../sass/quiz.scss */
+#quiz .question .questionWord {
+  font-size: 17px;
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}
+/* line 67, ../sass/quiz.scss */
+#quiz .question .questionAnswers {
+  font-size: 15px;
 }
 
 /* line 1, ../sass/wordbank.scss */
@@ -131,87 +184,77 @@
   }
 }
 /* line 17, ../sass/wordbank.scss */
-#form-wrapper #notif-form {
-  margin: 15px auto 0px auto;
-  width: 100%;
-  max-width: 400px;
-}
-@media (min-width: 320px) {
-  /* line 17, ../sass/wordbank.scss */
-  #form-wrapper #notif-form {
-    width: 90%;
-  }
-}
-/* line 25, ../sass/wordbank.scss */
-#form-wrapper #notif-form #added {
-  font-size: 18px;
-  font-weight: 500;
+#form-wrapper .wordBankNotif {
+  margin-left: 5px;
+  color: #c70404;
+  font-size: 12px;
+  font-family: "Muli", sans-serif;
 }
 
-/* line 32, ../sass/wordbank.scss */
+/* line 25, ../sass/wordbank.scss */
 #table-wrapper {
   width: 95%;
   margin: 20px auto 0px auto;
 }
 @media (min-width: 480px) {
-  /* line 32, ../sass/wordbank.scss */
+  /* line 25, ../sass/wordbank.scss */
   #table-wrapper {
     width: 90%;
   }
 }
 @media (min-width: 768px) {
-  /* line 32, ../sass/wordbank.scss */
+  /* line 25, ../sass/wordbank.scss */
   #table-wrapper {
     width: 80%;
   }
 }
-/* line 42, ../sass/wordbank.scss */
+/* line 35, ../sass/wordbank.scss */
 #table-wrapper #options-wrapper {
   flex: 100%;
   margin: 0px 5px;
   display: flex;
   flex-flow: row wrap;
 }
-/* line 47, ../sass/wordbank.scss */
+/* line 40, ../sass/wordbank.scss */
 #table-wrapper #options-wrapper .option {
   margin: 0px 5px 5px 0px;
 }
-/* line 50, ../sass/wordbank.scss */
+/* line 43, ../sass/wordbank.scss */
 #table-wrapper #options-wrapper #wordCount {
   width: 45px;
 }
-/* line 53, ../sass/wordbank.scss */
+/* line 46, ../sass/wordbank.scss */
 #table-wrapper #options-wrapper #wordPart {
   width: 60px;
 }
 @media (min-width: 480px) {
-  /* line 53, ../sass/wordbank.scss */
+  /* line 46, ../sass/wordbank.scss */
   #table-wrapper #options-wrapper #wordPart {
     width: 80px;
   }
 }
-/* line 59, ../sass/wordbank.scss */
+/* line 52, ../sass/wordbank.scss */
 #table-wrapper #options-wrapper #wordSearch {
   width: 110px;
 }
 @media (min-width: 480px) {
-  /* line 59, ../sass/wordbank.scss */
+  /* line 52, ../sass/wordbank.scss */
   #table-wrapper #options-wrapper #wordSearch {
     width: 130px;
   }
 }
-/* line 67, ../sass/wordbank.scss */
+/* line 60, ../sass/wordbank.scss */
 #table-wrapper #list {
   margin-bottom: 0px;
   font-size: 13px;
 }
 @media (min-width: 320px) {
-  /* line 67, ../sass/wordbank.scss */
+  /* line 60, ../sass/wordbank.scss */
   #table-wrapper #list {
     font-size: 14px;
   }
 }
-/* line 73, ../sass/wordbank.scss */
+/* line 66, ../sass/wordbank.scss */
 #table-wrapper #list .col2 {
   min-width: 80px;
 }
@@ -226,12 +269,12 @@
   margin-top: 25px;
 }
 
-/* line 9, ../sass/styles.scss */
+/* line 12, ../sass/styles.scss */
 body {
   min-width: 320px;
   background-color: #d8bfd8;
 }
-/* line 13, ../sass/styles.scss */
+/* line 16, ../sass/styles.scss */
 body #navigation {
   margin: auto;
   width: 100%;
@@ -240,48 +283,48 @@ body #navigation {
   flex-flow: row wrap;
 }
 @media (min-width: 768px) {
-  /* line 13, ../sass/styles.scss */
+  /* line 16, ../sass/styles.scss */
   body #navigation {
     width: 90%;
   }
 }
 @media (min-width: 992px) {
-  /* line 13, ../sass/styles.scss */
+  /* line 16, ../sass/styles.scss */
   body #navigation {
     width: 80%;
   }
 }
-/* line 25, ../sass/styles.scss */
+/* line 28, ../sass/styles.scss */
 body #navigation a {
   text-decoration: none;
 }
-/* line 29, ../sass/styles.scss */
+/* line 32, ../sass/styles.scss */
 body #navigation .nav-row {
   flex: 100%;
 }
-/* line 33, ../sass/styles.scss */
+/* line 36, ../sass/styles.scss */
 body #navigation .nav-signin {
   text-align: right;
 }
-/* line 35, ../sass/styles.scss */
+/* line 38, ../sass/styles.scss */
 body #navigation .nav-signin a {
   font-size: 11px;
   padding: 5px;
   margin-right: 10px;
 }
-/* line 42, ../sass/styles.scss */
+/* line 45, ../sass/styles.scss */
 body #navigation #title {
   text-align: center;
   font-weight: 500;
   font-size: 26px;
 }
 @media (min-width: 480px) {
-  /* line 42, ../sass/styles.scss */
+  /* line 45, ../sass/styles.scss */
   body #navigation #title {
     font-size: 32px;
   }
 }
-/* line 51, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 body #navigation #menu {
   margin: 20px auto 5px auto;
   width: 100%;
@@ -291,24 +334,24 @@ body #navigation #menu {
   justify-content: space-around;
 }
 @media (min-width: 320px) {
-  /* line 51, ../sass/styles.scss */
+  /* line 54, ../sass/styles.scss */
   body #navigation #menu {
     width: 95%;
   }
 }
 @media (min-width: 480px) {
-  /* line 51, ../sass/styles.scss */
+  /* line 54, ../sass/styles.scss */
   body #navigation #menu {
     width: 80%;
   }
 }
 @media (min-width: 992px) {
-  /* line 51, ../sass/styles.scss */
+  /* line 54, ../sass/styles.scss */
   body #navigation #menu {
     width: 70%;
   }
 }
-/* line 70, ../sass/styles.scss */
+/* line 73, ../sass/styles.scss */
 body #content {
   margin: 0px auto 20px auto;
   padding: 20px 5px;
@@ -318,20 +361,20 @@ body #content {
   flex-flow: row wrap;
 }
 @media (min-width: 320px) {
-  /* line 70, ../sass/styles.scss */
+  /* line 73, ../sass/styles.scss */
   body #content {
     width: 95%;
     border-radius: 7px;
   }
 }
 @media (min-width: 480px) {
-  /* line 70, ../sass/styles.scss */
+  /* line 73, ../sass/styles.scss */
   body #content {
-    width: 80%;
+    width: 82%;
   }
 }
 @media (min-width: 992px) {
-  /* line 70, ../sass/styles.scss */
+  /* line 73, ../sass/styles.scss */
   body #content {
     width: 70%;
   }

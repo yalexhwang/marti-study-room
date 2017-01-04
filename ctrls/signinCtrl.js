@@ -11,6 +11,7 @@ martiApp.controller('signinCtrl', function($scope, $rootScope, $http, $location,
 			console.log(rspns);
 			if (rspns.data.passFail) {
 				$cookies.putObject('user', rspns.data.doc);
+				console.log(rspns.data.doc);
 				$location.path('#/');
 			} else {
 				$scope.passcode = "";

@@ -42,7 +42,8 @@ router.post('/signin', function(req, res, next) {
 								passFail: 1,
 								doc: {
 									id: doc._id,
-									token: doc.token
+									token: doc.token,
+									tests: doc.tests
 								}
 							});
 						} else {
