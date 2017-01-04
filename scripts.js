@@ -9,7 +9,6 @@ martiApp.run(function($rootScope, $http, $cookies, $location) {
 		if (user !== undefined) {
 			$http.post(url + '/verify', user)
 			.then(function success(rspns) {
-				console.log(rspns);
 				if (rspns.data.passFail) {
 					$rootScope.signedIn = 1;
 				} else {
@@ -28,7 +27,7 @@ martiApp.run(function($rootScope, $http, $cookies, $location) {
 //Router setting
 martiApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
-		controller: 'martiCtrl',
+		controller: 'homeCtrl',
 		templateUrl: 'templates/home.html'
 	})
 	.when('/quiz', {
@@ -138,7 +137,7 @@ function createCurrentList(fullList, categoryNum) {
 	var arr = [];
 	var index = 1;
 	for (var i = 0; i < fullList.length; i++) {
-		if (categoryNum === "all") {
+		if (categoryNum === "All") {
 			var word = fullList[i];
 			word.index = word.rootIndex;
 			arr.push(word);

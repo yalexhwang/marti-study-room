@@ -3,45 +3,52 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, WordBank
 		$location.path('/signin');
 	}
 
-	//Default Settings
+	//Same fullList from homeCtrl
+	console.log($scope.fullList);
+	//Default Setting
 	$scope.quizOption1 = 20;
 	$scope.quizOption2 = "All";
-	$scope.quizOption3 = 5;
+	$scope.quizOption3 = 4;
 	$scope.quizOption4 = "No";
 	$scope.quizStarted = 0;
 
+	$scope.start = function() {
+		$scope.quizList = [];
+		console.log($scope.quizOption1);
+		console.log($scope.quizOption2);
+		console.log($scope.quizOption3);
+		console.log($scope.quizOption4);
+		
+		if ($scope.quizOption2 === "All") {
+			$scope.quizList = shuffleArray($scope.fullList);
+		} else {
+			for (var i = 0; i < $scope.fullList.length; i++) {
+				if ($scope.fullList[i].part == $scope.quizOption2) {
+					$scope.quizList.push($scope.fullList[i]);
+				}
+			}
+			$scope.quizList = shuffleArray($scope.quizList);
+		}
+		console.log('quizList:');
+		console.log($scope.quizList);
 
-	WordBankService.getFullList()
-	.then(function success(rspns) {
-		$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-	}, function fail(rspns) {
-		console.log('error while getting the full list');
-		console.log(rspns.data);
-	});
-
-	$scope.allSelected = function() {
-		$scope.part0 = 0;
-		$scope.part1 = 0;
-		$scope.part2 = 0;
-		$scope.part3 = 0;
-		$scope.part4 = 0;
-		$scope.part5 = 0;
-		$scope.part6 = 0;
-		$scope.part7 = 0;
-
-	};
-
-	$scope.startQuiz = function() {
-		console.log($scope.partCategory);
-		console.log($scope.nmOfQs);
-		console.log($scope.choices4);
-		console.log($scope.choices5);
+		//Get an array of possible answer options, including the correct one
+		for (var i = 0; i < $scope.quizList.length; i++) {
+			var options;
+			if (i === 0) {
+				options = shuffleArray($scope.quizList.slice(1));
+			} else if (i === $scope.quizList.length - 1) {
+				options = shuffleArray($scope.quizList.slice(0, $scope.quizList.length - 1));
+			} else {
+				options = shuffleArray($scope.quizList.slice(0, i).concat($scope.quizList.slice(i)));
+			}
+			options = options.slice(0, $scope.quizOption3 - 1);
+			options.push($scope.quizList[i]);
+			$scope.quizList[i].answerOptions = shuffleArray(options);
+		}
+		console.log('quizList with answerOptions:');
+		console.log($scope.quizList);
 		$scope.quizStarted = 1;
-		$scope.partCategory = "";
-		$scope.numOfQs = "";
-		$scope.choices = "";
-
-
 	};
 
 });

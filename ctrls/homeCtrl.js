@@ -1,4 +1,4 @@
-martiApp.controller('martiCtrl', function($scope, $rootScope, $http, $cookies, $location, WordBankService) {
+martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $location, WordBankService) {
 	$scope.wordCover = 0;
 	$scope.partCover = 0;
 	$scope.definitionCover = 0;
@@ -23,7 +23,7 @@ martiApp.controller('martiCtrl', function($scope, $rootScope, $http, $cookies, $
 	.then(function success(rspns) {
 		console.log(rspns);
 		$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-		$scope.currentList = createCurrentList($scope.fullList, 'all');
+		$scope.currentList = createCurrentList($scope.fullList, 'All');
 		console.log($scope.currentList);
 		$scope.word = $scope.currentList[index];
 		$scope.totalPage = $scope.currentList.length;
@@ -50,7 +50,7 @@ martiApp.controller('martiCtrl', function($scope, $rootScope, $http, $cookies, $
 
 	$scope.unshuffle = function() {
 		if ($scope.partCategory == undefined) {
-			$scope.currentList = createCurrentList($scope.fullList, 'all');
+			$scope.currentList = createCurrentList($scope.fullList, 'All');
 		} else {
 			$scope.currentList = createCurrentList($scope.fullList, $scope.partCategory);
 		}

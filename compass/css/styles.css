@@ -75,14 +75,36 @@
 }
 
 /* line 1, ../sass/quiz.scss */
-#quiz-wrapper {
+#quizSetting {
   flex: 100%;
   display: flex;
   flex-flow: row wrap;
 }
 /* line 6, ../sass/quiz.scss */
-#quiz-wrapper #quizOptions {
+#quizSetting #table-wrapper {
   flex: 100%;
+  margin-top: 0px;
+}
+/* line 9, ../sass/quiz.scss */
+#quizSetting #table-wrapper h4 {
+  text-align: center;
+}
+/* line 12, ../sass/quiz.scss */
+#quizSetting #table-wrapper table {
+  margin: auto;
+  width: 70%;
+  max-width: 320px;
+}
+/* line 16, ../sass/quiz.scss */
+#quizSetting #table-wrapper table .glyphicon-edit {
+  font-size: 12px;
+  color: grey;
+}
+/* line 23, ../sass/quiz.scss */
+#quizSetting #btn-wrapper {
+  flex: 100%;
+  margin-top: 15px;
+  text-align: center;
 }
 
 /* line 1, ../sass/wordbank.scss */

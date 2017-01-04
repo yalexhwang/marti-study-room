@@ -2,34 +2,34 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 	if ($rootScope.signedIn === 0) {
 		$location.path('/signin');
 	}
-	//Initial Setting - forms
+
+	//Default Setting for Word List
+	$scope.currentPage = 1;
+	$scope.wordCount = 10;
+	//Same fullList from homeCtrl
+	console.log($scope.fullList);
+	//Create the curret page list
+	$scope.currentList = createCurrentList($scope.fullList, 'All');
+	console.log($scope.currentList);
+	//Create the curret page list
+	$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
+	console.log($scope.pageList);
+		//Create the page array
+	$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
+
+	//Default Setting for the form
 	$scope.showFormNotif = 0;
 	$scope.showKOR = 1;
 	$scope.formTitle = "Add Korean";
 	$scope.switchLng = "English";
 	$scope.sortOption = "A-Z";
 
-	//Change the form between KOR and ENG
-	$scope.toggleForm = function() {
-		//Currently unavailable
-		$window.alert('Coming Soon');
-		// if ($scope.showKOR) {
-		// 	$scope.showKOR = 0;
-		// 	$scope.formTitle = "Add English"
-		// 	$scope.switchLng = "Korean";
-		// } else {
-		// 	$scope.showKOR = 1;
-		// 	$scope.formTitle = "Add Korean";
-		// 	$scope.switchLng = "English";
-		// }
-	};
-
 	//Adding Korean
 	$scope.KOR = {};
 	$scope.addKOR = function() {
 		var duplicate = 0;
-		for (var i = 0; i < $rootScope.fullList.length; i++) {
-			if ($scope.KOR.word == $rootScope.fullList[i].word) {
+		for (var i = 0; i < $scope.fullList.length; i++) {
+			if ($scope.KOR.word == $scope.fullList[i].word) {
 				duplicate = 1;
 			}
 		}
@@ -87,8 +87,8 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 	$scope.updateFullList = function() {
 		WordBankService.getFullList()
 		.then(function success(rspns) {
-			$rootScope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-			$scope.currentList = createCurrentList($rootScope.fullList, 'all');
+			$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
+			$scope.currentList = createCurrentList($scope.fullList, 'All');
 			$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 			$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
 		}, function fail(rspns) {
@@ -96,38 +96,19 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 		});
 	};
 
-	//Default Setting for Word List
-	$scope.currentPage = 1;
-	$scope.wordCount = 10;
-
-	WordBankService.getFullList()
-	.then(function success(rspns) {
-		//Create the full list and the current list
-		$rootScope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-		$scope.currentList = createCurrentList($rootScope.fullList, 'all');
-		//Create the curret page list
-		$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
-		//Create the page array
-		$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
-	}, function fail(rspns) {
-		console.log(rspns);
-	});
-
 	//Update Words Per Page View
 	$scope.updateNumPerPage = function() {
 		var lastPage = Math.ceil($scope.currentList.length / $scope.wordCount);
 		if ($scope.currentPage > lastPage) {
 			$scope.currentPage = lastPage;
 		}
-		//Create the current page list
 		$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
-		//Create the page array
 		$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
 	};
 
 	//Update part category
 	$scope.updatePartCategory = function() {
-		$scope.currentList = createCurrentList($rootScope.fullList, $scope.partCategory);
+		$scope.currentList = createCurrentList($scope.fullList, $scope.partCategory);
 		$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 		$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
 	};
@@ -153,8 +134,8 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 		.then(function success(rspns) {
 			WordBankService.getFullList()
 			.then(function success(rspns) {
-				$rootScope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-				$scope.currentList = createCurrentList($rootScope.fullList, 'all');
+				$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
+				$scope.currentList = createCurrentList($scope.fullList, 'All');
 				$scope.pageList = createPageList($scope.currentList, $scope.currentPage, $scope.wordCount);
 				$scope.pages = calculatePageView($scope.currentList.length, $scope.wordCount);
 			}, function fail(rspns) {
