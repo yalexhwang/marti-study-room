@@ -9,9 +9,10 @@ martiApp.run(function($rootScope, $http, $cookies, $location) {
 		if (user !== undefined) {
 			$http.post(url + '/verify', user)
 			.then(function success(rspns) {
-				if (rspns.data.passFail) {
+				if (rspns.data.passFail === 1) {
 					$rootScope.signedIn = 1;
 				} else {
+					console.log(rspns.data.doc);
 					$rootScope.signedIn = 0;
 				}
 			}, function fail(rspns) {

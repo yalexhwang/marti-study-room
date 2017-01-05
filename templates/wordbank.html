@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div class="col-sm-offset-3">
-				<button type="submit" class="btn btn-default" ng-hide="showUpdateBtn">Add</button>
+				<button type="submit" class="btn btn-default">Add</button>
 				<button type="button" class="btn btn-default" ng-show="showUpdateBtn" ng-click="updateFullList()">Update List</button>
 				<span class="wordBankNotif" ng-show="showNotif">{{notifMessage}}</span>
 			</div>
@@ -47,7 +47,7 @@
 				<option value="20">20</option>
 				<option value="30">30</option>
 				<option value="50">50</option>
-				<option value="{{fullList.length}}">All</option>
+				<option value="0">All</option>
 			</select>
 		</div>
 		<div class="option" id="wordPart">
@@ -64,13 +64,13 @@
 			</select>
 		</div>
 		<div class="option">
-			<button type="button" class="btn btn-default btn-sm" ng-click="sortByWord()">{{sortOption1}}</button>
+			<button type="button" class="btn btn-default btn-sm" ng-click="sortByWord()">Word</button>
 		</div>
 		<div class="option">
-			<button type="button" class="btn btn-default btn-sm" ng-click="sortByPart()">{{sortOption2}}</button>
+			<button type="button" class="btn btn-default btn-sm" ng-click="sortByPart()">Part</button>
 		</div>
 		<div class="option">
-			<button type="button" class="btn btn-default btn-sm" ng-click="sortByTimeAdded()">{{sortOption3}}</button>
+			<button type="button" class="btn btn-default btn-sm" ng-click="sortByTime()">Time Added</button>
 		</div>
 		<div class="option" id="wordSearch">
 			<input type="text" class="form-control input-sm" placeholder="Search" ng-model="searchWord">

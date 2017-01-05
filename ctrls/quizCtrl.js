@@ -2,13 +2,8 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 	if ($rootScope.signedIn === 0) {
 		$location.path('/signin');
 	}
-
 	$scope.user = $cookies.getObject('user');
-	var now = new Date().toString().slice(3, 16) + "(" + new Date().toString().slice(0, 3) + ")";
-	$scope.today = now;
 
-	//Same fullList from homeCtrl
-	console.log($scope.fullList);
 	//Default Setting
 	$scope.showNotif = 0;
 	$scope.quizOption1 = 20;
@@ -17,8 +12,18 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 	$scope.quizOption4 = "No";
 	$scope.quizStarted = 0;
 
+	WordBankService.getFullList()
+	.then(function success(rspns) {
+		$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
+	}, function fail(rspns) {
+		console.log(rspns);
+	});
+
 	$scope.start = function() {
+		$scope.today = new Date().toString().slice(3, 15) + ", " + new Date().toString().slice(0, 3) + "";
+
 		$scope.quizList = [];
+		var fullList = $scope.fullList;
 		console.log($scope.quizOption1);
 		console.log($scope.quizOption2);
 		console.log($scope.quizOption3);
@@ -32,11 +37,11 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 		}
 
 		if ($scope.quizOption2 === "All") {
-			$scope.quizList = shuffleArray($scope.fullList).slice(0, $scope.quizOption1);
+			$scope.quizList = shuffleArray(fullList).slice(0, $scope.quizOption1);
 		} else {
-			for (var i = 0; i < $scope.fullList.length; i++) {
-				if ($scope.fullList[i].part == $scope.quizOption2) {
-					$scope.quizList.push($scope.fullList[i]);
+			for (var i = 0; i < fullList.length; i++) {
+				if (fullList[i].part == $scope.quizOption2) {
+					$scope.quizList.push(fullList[i]);
 				}
 			}
 			$scope.quizList = shuffleArray($scope.quizList).slice(0, $scope.quizOption1);

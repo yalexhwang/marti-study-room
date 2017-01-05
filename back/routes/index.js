@@ -10,6 +10,12 @@ mongoose.connect(mongoUrl);
 
 var randToken = require('rand-token');
 
+// -------------------------------------------
+// passFail 0: error (doc: err)
+// passFail 1: success (doc: doc)
+// passFail 2: success with error (doc: 'String')
+// -------------------------------------------
+
 router.post('/signin', function(req, res, next) {
 	var passcode = req.body.passcode;
 	console.log('passcode:' + passcode);
@@ -49,17 +55,18 @@ router.post('/signin', function(req, res, next) {
 						} else {
 							console.log('no doc found');
 							res.json({
-								passFail: 0,
-								doc: doc
+								passFail: 2,
+								doc: 'Error: passcode did not match (2nd line - check)'
 							});
 						}
 					}
 				});
 			} else {
+				console.log('no doc found');
 				res.json({
-					passFail: 0,
-					doc: doc
-				})
+					passFail: 2,
+					doc: 'Error: passcode did not match'
+				});
 			}
 		}
 	});
@@ -69,7 +76,7 @@ router.post('/verify', function(req, res, next) {
 	var user = req.body;
 	Passcode.findOne({'_id': user.id}, function(err, doc) {
 		if (err) {
-			console.log('verification error in finding a matching ID');
+			console.log('Error while running the query');
 			console.log(err);
 			res.json({
 				passFail: 0,
@@ -87,14 +94,14 @@ router.post('/verify', function(req, res, next) {
 					});
 				} else {
 					res.json({
-						passFail: 0,
-						doc: doc
+						passFail: 2,
+						doc: "Error: token did not match, verification failed"
 					});
 				}
 			} else {
 				res.json({
-					passFail: 0,
-					doc: doc
+					passFail: 2,
+					doc: "Error: failed to find the user"
 				});
 			}
 		}
@@ -105,7 +112,7 @@ router.post('/signout', function(req, res, next) {
 	console.log('/signout');
 	Passcode.findOneAndUpdate({'token': req.body.token}, {$set: {'token': ""}}, {new: true}, function(err, doc) {
 		if (err) {
-			console.log('verification error in finding a matching token');
+			console.log('Error while running the query');
 			console.log(err);
 			res.json({
 				passFail: 0,
@@ -119,8 +126,8 @@ router.post('/signout', function(req, res, next) {
 				});
 			} else {
 				res.json({
-					passFail: 0,
-					doc: doc
+					passFail: 2,
+					doc: 'Error: Could not find the matching token.'
 				});
 			}
 		}
@@ -141,15 +148,24 @@ router.post('/add', function(req, res, next) {
 	console.log(newWord);
 	Word.findOne({'word': newWord.word}, function(err, doc) {
 		if (err) {
-			console.log('Error while finding a ducplicate match');
+			console.log('Error while finding a duplicate');
 			console.log(err);
+			res.json({
+				passFail: 0,
+				doc: err
+			});
 		} else {
 			if (doc) {
+				console.log('Duplicate found!');
 				console.log(doc);
+				res.json({
+					passFail: 2,
+					doc: 'Error: duplicate found'
+				});
 			} else {
 				newWord.save(function(err, saved, status) {
 					if (err) {
-						console.log('line25: error in saving a new word');
+						console.log('Error while saving the new word');
 						console.log(err);
 						res.json({
 							passFail: 0,
@@ -169,10 +185,10 @@ router.post('/add', function(req, res, next) {
 
 router.post('/remove', function(req, res, next) {
 	var id = req.body.id;
-	console.log(id);
+	console.log('id to remove: ' + id);
 	Word.remove({_id: id}, function(err) {
 		if (err) {
-			console.log('line 59: error in removing a word');
+			console.log('Error while removing the word');
 			console.log(err);
 			res.json({
 				passFail: 0,
@@ -189,15 +205,13 @@ router.post('/remove', function(req, res, next) {
 router.post('/get_full_list', function(req, res, next) {
 	Word.find({}, function(err, doc) {
 		if (err) {
-			console.log('line 45: error in getting the full list');
+			console.log('Error while running the query');
 			console.log(err);
 			res.json({
 				passFail: 0,
 				doc: err
 			})
 		} else {
-			console.log(doc);
-			console.log('hihihihi');
 			res.json({
 				passFail: 1,
 				doc: doc

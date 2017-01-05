@@ -49,14 +49,15 @@
 		This is a filler
 	</div>
 	<div id="btn-wrapper">
-		<button type="button" class="btn btn-default" ng-click="start()">Start</button>
+		<button type="button" class="btn btn-default btn-lg" ng-click="start()">Start</button>
 	</div>
 
 </div>
 
 <div id="quiz" ng-show="quizStarted">
 	<div id="quiz-header">
-		Quiz No. {{user.tests.length + 1}}, {{today}}
+		<span id="quiz-number">Quiz #{{user.tests.length + 1}}</span>
+		<span id="quiz-date">{{today}}</span>
 	</div>
 	<div class="question" ng-repeat="item in quizList track by $index">
 		<div class="questionWord">{{$index + 1}}. {{item.word}}</div>

@@ -4,17 +4,20 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 	$scope.definitionCover = 0;
 
 	$scope.signout = function() {
-		console.log('signout');
 		$http.post(url + '/signout', $cookies.getObject('user'))
 		.then(function success(rspns) {
-			if (rspns.data.passFail) {
+			if (rspns.data.passFail === 1) {
 				$cookies.remove('user');
 				$location.path('#/');
+			} else if (rspns.data.passFail === 2) {
+				console.log(doc);
+				//alert: try again (no matching token)
 			} else {
-				//alert: try again
+				console.log(doc);
+				//alert: try again (query fail)
 			}
 		}, function fail(rspns) {
-			//alert: try again
+			//alert: try again (AJAX call fail)
 		});
 	};
 
@@ -28,7 +31,7 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 		$scope.word = $scope.currentList[index];
 		$scope.totalPage = $scope.currentList.length;
 	}, function fail(rspns) {
-
+		console.log(rspns);
 	});
 
 	$scope.updatePartCategory = function() {

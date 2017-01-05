@@ -37,39 +37,41 @@
   flex: 70%;
   margin: 0px 5px;
   padding: 10px 20px;
+  min-height: 150px;
   background-color: #f5f5f5;
   border-radius: 5px;
   display: flex;
   flex-flow: row wrap;
 }
-/* line 39, ../sass/home.scss */
+/* line 40, ../sass/home.scss */
 #card-wrapper #card .card-page {
   flex: 15%;
   text-align: right;
-  font-size: 11px;
+  font-size: 12px;
 }
-/* line 44, ../sass/home.scss */
+/* line 45, ../sass/home.scss */
 #card-wrapper #card .card-word {
   flex: 80%;
   font-size: 24px;
   font-weight: bold;
 }
-/* line 49, ../sass/home.scss */
+/* line 50, ../sass/home.scss */
 #card-wrapper #card .card-part {
   flex: 100%;
   font-size: 14px;
 }
-/* line 53, ../sass/home.scss */
+/* line 54, ../sass/home.scss */
 #card-wrapper #card .card-definition {
   flex: 100%;
   margin-top: 10px;
   font-size: 18px;
+  font-family: "Libre Franklin", helvetica, sans-serif;
 }
-/* line 60, ../sass/home.scss */
+/* line 62, ../sass/home.scss */
 #card-wrapper #card .cover {
   color: transparent;
 }
-/* line 63, ../sass/home.scss */
+/* line 65, ../sass/home.scss */
 #card-wrapper #card .cover:hover {
   color: black;
 }
@@ -144,20 +146,36 @@
 /* line 56, ../sass/quiz.scss */
 #quiz #quiz-header {
   margin: 15px 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
-/* line 60, ../sass/quiz.scss */
+/* line 62, ../sass/quiz.scss */
+#quiz #quiz-header #quiz-number {
+  font-size: 16px;
+  font-weight: 500;
+}
+/* line 66, ../sass/quiz.scss */
+#quiz #quiz-header #quiz-date {
+  font-size: 16px;
+  font-family: 'Handlee', serif;
+  padding-right: 5px;
+}
+/* line 73, ../sass/quiz.scss */
 #quiz .question {
   margin-bottom: 20px;
 }
-/* line 62, ../sass/quiz.scss */
+/* line 75, ../sass/quiz.scss */
 #quiz .question .questionWord {
   font-size: 17px;
   padding: 5px;
   border-bottom: 1px solid grey;
 }
-/* line 67, ../sass/quiz.scss */
+/* line 80, ../sass/quiz.scss */
 #quiz .question .questionAnswers {
   font-size: 15px;
+  font-family: "Libre Franklin", helvetica, sans-serif;
 }
 
 /* line 1, ../sass/wordbank.scss */
@@ -258,6 +276,14 @@
 #table-wrapper #list .col2 {
   min-width: 80px;
 }
+/* line 69, ../sass/wordbank.scss */
+#table-wrapper #list .col3 {
+  font-size: 13px;
+}
+/* line 72, ../sass/wordbank.scss */
+#table-wrapper #list .col4 {
+  font-family: "Libre Franklin", helvetica, sans-serif;
+}
 
 /* line 1, ../sass/signin.scss */
 #signin-wrapper {
@@ -269,12 +295,12 @@
   margin-top: 25px;
 }
 
-/* line 12, ../sass/styles.scss */
+/* line 13, ../sass/styles.scss */
 body {
   min-width: 320px;
   background-color: #d8bfd8;
 }
-/* line 16, ../sass/styles.scss */
+/* line 17, ../sass/styles.scss */
 body #navigation {
   margin: auto;
   width: 100%;
@@ -283,48 +309,48 @@ body #navigation {
   flex-flow: row wrap;
 }
 @media (min-width: 768px) {
-  /* line 16, ../sass/styles.scss */
+  /* line 17, ../sass/styles.scss */
   body #navigation {
     width: 90%;
   }
 }
 @media (min-width: 992px) {
-  /* line 16, ../sass/styles.scss */
+  /* line 17, ../sass/styles.scss */
   body #navigation {
     width: 80%;
   }
 }
-/* line 28, ../sass/styles.scss */
+/* line 29, ../sass/styles.scss */
 body #navigation a {
   text-decoration: none;
 }
-/* line 32, ../sass/styles.scss */
+/* line 33, ../sass/styles.scss */
 body #navigation .nav-row {
   flex: 100%;
 }
-/* line 36, ../sass/styles.scss */
+/* line 37, ../sass/styles.scss */
 body #navigation .nav-signin {
   text-align: right;
 }
-/* line 38, ../sass/styles.scss */
+/* line 39, ../sass/styles.scss */
 body #navigation .nav-signin a {
   font-size: 11px;
   padding: 5px;
   margin-right: 10px;
 }
-/* line 45, ../sass/styles.scss */
+/* line 46, ../sass/styles.scss */
 body #navigation #title {
   text-align: center;
   font-weight: 500;
   font-size: 26px;
 }
 @media (min-width: 480px) {
-  /* line 45, ../sass/styles.scss */
+  /* line 46, ../sass/styles.scss */
   body #navigation #title {
     font-size: 32px;
   }
 }
-/* line 54, ../sass/styles.scss */
+/* line 55, ../sass/styles.scss */
 body #navigation #menu {
   margin: 20px auto 5px auto;
   width: 100%;
@@ -334,24 +360,24 @@ body #navigation #menu {
   justify-content: space-around;
 }
 @media (min-width: 320px) {
-  /* line 54, ../sass/styles.scss */
+  /* line 55, ../sass/styles.scss */
   body #navigation #menu {
     width: 95%;
   }
 }
 @media (min-width: 480px) {
-  /* line 54, ../sass/styles.scss */
+  /* line 55, ../sass/styles.scss */
   body #navigation #menu {
     width: 80%;
   }
 }
 @media (min-width: 992px) {
-  /* line 54, ../sass/styles.scss */
+  /* line 55, ../sass/styles.scss */
   body #navigation #menu {
     width: 70%;
   }
 }
-/* line 73, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 body #content {
   margin: 0px auto 20px auto;
   padding: 20px 5px;
@@ -361,20 +387,20 @@ body #content {
   flex-flow: row wrap;
 }
 @media (min-width: 320px) {
-  /* line 73, ../sass/styles.scss */
+  /* line 74, ../sass/styles.scss */
   body #content {
     width: 95%;
     border-radius: 7px;
   }
 }
 @media (min-width: 480px) {
-  /* line 73, ../sass/styles.scss */
+  /* line 74, ../sass/styles.scss */
   body #content {
     width: 82%;
   }
 }
 @media (min-width: 992px) {
-  /* line 73, ../sass/styles.scss */
+  /* line 74, ../sass/styles.scss */
   body #content {
     width: 70%;
   }
