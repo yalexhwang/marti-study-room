@@ -6,8 +6,8 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 	//Default Setting
 	$scope.showNotif = 0;
 	$scope.currentPage = 1;
-	$scope.wordCount = 10;
-	$scope.wordCountMax = $scope.fullList.length;
+	var defaultWordCount = 10;
+	$scope.wordCount = defaultWordCount;
 	var sortByWord = {
 		on: 0,
 		reverse: 0
@@ -27,9 +27,9 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 		//Current List for Word Bank page
 		$scope.wordBankList = createCurrentList($scope.fullList, 'All');
 		//Create the curret page list
-		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
+		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, defaultWordCount);
 		//Create the page array
-		$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);
+		$scope.pages = calculatePageView($scope.wordBankList.length, defaultWordCount);
 	}, function fail(rspns) {
 		console.log(rspns);
 	});
@@ -55,43 +55,71 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 	};
 
 	$scope.updateFullList = function() {
+		console.log($scope.currentPage);
+		console.log($scope.wordCount);
+		console.log($scope.partCategory);
 		WordBankService.getFullList()
 		.then(function success(rspns) {
 			$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-			console.log($scope.partCategory);
-			if ($scope.partCategory) {
-				console.log('there is');
-				$scope.wordBankList = createCurrentList($scope.fullList, $scope.partCategory);
-			} else {
-				console.log('~~~~all');
-				$scope.wordBankList = createCurrentList($scope.fullList, "All");
+			if ($scope.partCategory == undefined) {
+				$scope.partCategory = 'All';
 			}
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-			$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);
+			console.log('updated $scope.partCategory');
+			console.log($scope.partCategory);
+			$scope.wordBankList = createCurrentList($scope.fullList, $scope.partCategory);
+			console.log('wordBankList:');
+			console.log($scope.wordBankList);
+
+			if ($scope.wordCount == 0) {
+			//meaning show 'all', so same as wordBankList.length
+			$scope.currentPage = 1;
+			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordBankList.length);
+			$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordBankList.length);
+			} else {
+				var lastPage = Math.ceil($scope.wordBankList.length / $scope.wordCount);
+				if ($scope.currentPage > lastPage) {
+					$scope.currentPage = lastPage;
+				}
+				$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);		
+				$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);	
+			}
+
+			// console.log($scope.fullList);
+			// console.log($scope.wordBankList);
+			// console.log($scope.pages);
+			// console.log($scope.partCategory);
+			// if ($scope.partCategory) {
+			// 	console.log('there is');
+			// 	$scope.wordBankList = createCurrentList($scope.fullList, $scope.partCategory);
+			// } else {
+			// 	console.log('~~~~all');
+			// 	$scope.wordBankList = createCurrentList($scope.fullList, "All");
+			// }
+			
 			//Depends on sort setting
 			console.log(sortByWord);
 			console.log(sortByPart);
 			console.log(sortByTime);
 
-			if (sortByWord.on) {
-				if (sortByWord.reverse) {
+			// if (sortByWord.on) {
+			// 	if (sortByWord.reverse) {
 
-				} else {
+			// 	} else {
 
-				}
-			} else if (sortByPart.on) {
-				if (sortByWord.reverse) {
+			// 	}
+			// } else if (sortByPart.on) {
+			// 	if (sortByWord.reverse) {
 
-				} else {
+			// 	} else {
 					
-				}
-			} else if (sortByTime.on) {
-				if (sortByWord.reverse) {
+			// 	}
+			// } else if (sortByTime.on) {
+			// 	if (sortByWord.reverse) {
 
-				} else {
+			// 	} else {
 					
-				}
-			}
+			// 	}
+			// }
 			$scope.showNotif = 0;
 			$scope.showUpdateBtn = 0;
 		}, function fail(rspns) {
@@ -103,19 +131,25 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 	//Update Words Per Page View
 	$scope.updateNumPerPage = function() {
 		if ($scope.wordCount == 0) {
-			$scope.wordCount = $scope.fullList.length;
+			//meaning show 'all', so same as wordBankList.length
+			$scope.currentPage = 1;
+			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordBankList.length);
+			$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordBankList.length);
+		} else {
+			var lastPage = Math.ceil($scope.wordBankList.length / $scope.wordCount);
+			if ($scope.currentPage > lastPage) {
+				$scope.currentPage = lastPage;
+			}
+			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);		
+			$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);	
 		}
-		var lastPage = Math.ceil($scope.wordBankList.length / $scope.wordCount);
-		if ($scope.currentPage > lastPage) {
-			$scope.currentPage = lastPage;
-		}
-		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);
 	};
 
 	//Update part category
 	$scope.updatePartCategory = function() {
 		console.log($scope.partCategory);
+		console.log($scope.wordCount);
+		$scope.wordCount = $scope.wordBankList.length;
 		$scope.wordBankList = createCurrentList($scope.fullList, $scope.partCategory);
 		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
 		$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);
@@ -125,54 +159,66 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 	$scope.sortByWord = function() {
 		sortByPart.on = 0;
 		sortByTime.on = 0;
-
-
-		if (sortByWord === 0) {
-			sortByWord = 1;
-
+		if (sortByWord.on) {
+			if (sortByWord.reverse) {
+				//sorted (reverse to no reverse)
+				sortByWord.reverse = 0;
+				$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByWordAscending));
+			} else {
+				//sorted (no reverse to reverse)
+				sortByWord.reverse = 1;
+				$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByWordDescending));
+			}
+		} else {
+			//not sorted
+			sortByWord.on = 1;
 			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByWordAscending));
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		} else if (sortByWord === 1) {
-			sortByWord = 2;
-			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByWordDescending));
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		} else if (sortByWord === 2) {
-			sortByWord = 1;
 		}
+		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
 	};
 
 	//Sort Option2
 	$scope.sortByPart = function() {
 		sortByWord.on = 0;
 		sortByTime.on = 0;
-		if (sortByPart === 0) {
-			sortByPartOrder = 1;
+		if (sortByPart.on) {
+			if (sortByPart.reverse) {
+				//sorted (reverse to no reverse)
+				sortByPart.reverse = 0;
+				$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByPartAscending));
+			} else {
+				//sorted (no reverse to reverse)
+				sortByPart.reverse = 1;
+				$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByPartDescending));
+			}
+		} else {
+			//not sorted
+			sortByPart.on = 1;
 			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByPartAscending));
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		} else if (sortByPart === 1) {
-			sortByPart = 2;
-			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByPartDescending));
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		} else if (sortByPart === 2) {
-			sortByPart = 1;
 		}
+		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
 	};
 
-	//SortOption3
+	//Sort Option3
 	$scope.sortByTime = function() {
 		sortByWord.on = 0;
 		sortByPart.on = 0;
-		if (sortByTime === 0) {
-			sortByTimeAddedOrder = 1;
-			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByTimeAddedAscending));
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		} else if (sortByTime === 1) {
-			sortByTimeAddedOrder = 2;
-			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByTimeAddedDescending));
-			$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-		} else if (sortByTime === 2) {
-			sortByTime = 1;
+		if (sortByTime.on) {
+			if (sortByTime.reverse) {
+				//sorted (reverse to no reverse)
+				sortByTime.reverse = 0;
+				$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByTimeAscending));
+			} else {
+				//sorted (no reverse to reverse)
+				sortByTime.reverse = 1;
+				$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByTimeDescending));
+			}
+		} else {
+			//not sorted
+			sortByTime.on = 1;
+			$scope.wordBankList = createSortedList($scope.wordBankList.sort(sortByTimeAscending));
 		}
+		$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
 	};
 
 	//Remove a word

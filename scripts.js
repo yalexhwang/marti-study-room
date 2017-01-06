@@ -233,7 +233,7 @@ function sortByPartDescending(a, b) {
 	}
 }
 
-function sortByTimeAddedAscending(a, b) {
+function sortByTimeAscending(a, b) {
 	if (a.rootIndex < b.rootIndex) {
 		return -1;
 	} else if (a.rootIndex > b.rootIndex) {
@@ -243,7 +243,7 @@ function sortByTimeAddedAscending(a, b) {
 	}
 }
 
-function sortByTimeAddedDescending(a, b) {
+function sortByTimeDescending(a, b) {
 	if (a.rootIndex < b.rootIndex) {
 		return 1;
 	} else if (a.rootIndex > b.rootIndex) {

@@ -70,4 +70,8 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 		}
 	};
 
+	$scope.submit = function() {
+		console.log($scope.selection);
+	};
+
 });

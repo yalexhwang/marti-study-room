@@ -42,12 +42,12 @@
 	<div id="options-wrapper">
 		<div class="option" id="wordCount">
 			<select class="form-control input-sm" ng-change="updateNumPerPage()" ng-model="wordCount">
-				<option value="10" ng-selected="1">10</option>
+				<option value="10">10</option>
 				<option value="15">15</option>
 				<option value="20">20</option>
 				<option value="30">30</option>
 				<option value="50">50</option>
-				<option value="0">All</option>
+				<option value="{{wordBankList.length}}">All</option>
 			</select>
 		</div>
 		<div class="option" id="wordPart">

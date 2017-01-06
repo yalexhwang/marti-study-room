@@ -63,9 +63,12 @@
 		<div class="questionWord">{{$index + 1}}. {{item.word}}</div>
 		<div class="questionAnswers">
 			<div class="radio" ng-repeat="option in item.answerOptions track by $index">
-				<label><input type="radio" name="option"> {{option.definition}}</label>
+				<label><input type="radio" name="option" value="{{option.$index}}" ng-model="selection"> {{option.definition}}</label>
 			</div>
 		</div>
+	</div>
+	<div id="submit">
+		<button type="button" class="btn btn-default btn-lg" ng-click="submit()">Done</button>
 	</div>
 </div>
 
