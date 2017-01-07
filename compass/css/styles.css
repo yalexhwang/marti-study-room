@@ -177,6 +177,31 @@
   font-size: 15px;
   font-family: "Libre Franklin", helvetica, sans-serif;
 }
+/* line 85, ../sass/quiz.scss */
+#quiz #submit {
+  margin: 30px auto;
+}
+/* line 90, ../sass/quiz.scss */
+#quiz #quiz-result #score {
+  width: 90%;
+  margin: 0px auto 20px auto;
+  text-align: center;
+  font-family: "Muli", sans-serif;
+}
+/* line 95, ../sass/quiz.scss */
+#quiz #quiz-result #score span {
+  color: red;
+  font-family: 'Handlee', serif;
+  font-size: 38px;
+  padding: 0px 15px;
+}
+/* line 102, ../sass/quiz.scss */
+#quiz #quiz-result #incorrectList {
+  margin: auto;
+  max-width: 420px;
+  font-size: 13px;
+  font-weight: 400;
+}
 
 /* line 1, ../sass/wordbank.scss */
 #form-wrapper {

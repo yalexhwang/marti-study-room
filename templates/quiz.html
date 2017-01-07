@@ -1,15 +1,15 @@
-<div id="quizSetting" ng-hide="quizStarted">
+<div id="quizSetting" ng-show="showQuizSetting">
 	<div id="table-wrapper">
 		<h4>Are you ready?</h4>
 		<table class="table table-bordered">
 			<tr>
 				<td>Total Questions</td>
-				<td><input class="form-control input-sm" type="number" min="10" max="50" placeholder="20" ng-click="showNotif = 0" ng-model="quizOption1"></span></td>
+				<td><input class="form-control input-sm" type="number" min="10" max="50" placeholder="20" ng-click="showQuizNotif = 0" ng-model="quizOption1"></td>
 			</tr>
 			<tr>
 				<td>Part of Speech</td>
 				<td>
-					<select class="form-control input-sm" ng-click="showNotif = 0" ng-model="quizOption2">
+					<select class="form-control input-sm" ng-click="showQuizNotif = 0" ng-model="quizOption2">
 						<option value="All" ng-selected="1">All</option>
 						<option value="0">명사 (noun)</option>
 						<option value="1">대명사 (pronoun)</option>
@@ -25,7 +25,7 @@
 			<tr>
 				<td>Multiple Choices</td>
 				<td>
-					<select class="form-control input-sm" ng-click="showNotif = 0" ng-model="quizOption3">
+					<select class="form-control input-sm" ng-click="showQuizNotif = 0" ng-model="quizOption3">
 						<option value="4" ng-selected="1">4</option>
 						<option value="5">5</option>
 					</select>
@@ -34,7 +34,7 @@
 			<tr>
 				<td>Timed</td>
 				<td>
-					<select class="form-control input-sm" ng-click="showNotif = 0" ng-model="quizOption4">
+					<select class="form-control input-sm" ng-click="showQuizNotif = 0" ng-model="quizOption4">
 						<option value="0" ng-selected="1">No</option>
 						<option value="1">Yes</option>
 					</select>
@@ -42,33 +42,61 @@
 			</tr>
 		</table>
 	</div>
-	<div class="quizNotif" ng-show="showNotif">
-		{{notifMessage}}
+	<!-- Error Notification -->
+	<div class="quizNotif" ng-show="showQuizNotif">
+		{{quizNotifMessage}}
 	</div>
-	<div class="quizNotif" id="quizNotif-filler" ng-hide="showNotif">
+	<div class="quizNotif" id="quizNotif-filler" ng-hide="showQuizNotif">
 		This is a filler
 	</div>
+	<!-- Start Button -->
 	<div id="btn-wrapper">
 		<button type="button" class="btn btn-default btn-lg" ng-click="start()">Start</button>
 	</div>
-
 </div>
 
-<div id="quiz" ng-show="quizStarted">
+<!-- Quiz -->
+<div id="quiz" ng-show="showQuiz">
+	<!-- Quiz Header -->
 	<div id="quiz-header">
 		<span id="quiz-number">Quiz #{{user.tests.length + 1}}</span>
 		<span id="quiz-date">{{today}}</span>
 	</div>
-	<div class="question" ng-repeat="item in quizList track by $index">
-		<div class="questionWord">{{$index + 1}}. {{item.word}}</div>
-		<div class="questionAnswers">
-			<div class="radio" ng-repeat="option in item.answerOptions track by $index">
-				<label><input type="radio" name="option" value="{{option.$index}}" ng-model="selection"> {{option.definition}}</label>
+	<!-- Questions, Answer Options and Submit form -->
+	<form ng-submit="submit()" ng-hide="showResult">
+		<div class="question" ng-repeat="item in quizList track by $index">
+			<div class="questionWord">{{$index + 1}}. {{item.word}}</div>
+			<div class="questionAnswers">
+				<div class="radio" ng-repeat="option in item.answerOptions track by $index">
+					<label><input type="radio" name="{{$parent.$index}}" ng-click="select($parent.$index, $index)" required> {{option.definition}}</label>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div id="submit">
-		<button type="button" class="btn btn-default btn-lg" ng-click="submit()">Done</button>
+		<div id="submit">
+			<button type="submit" class="btn btn-default">Done</button>
+		</div>
+	</form>
+	<div id="quiz-result" ng-show="showResult">
+		<div id="score">
+			<div>Your Score: <span>{{score}}</span> ({{resultCorrect.length}}/{{quizList.length}})</div>
+		</div>
+		<div id="incorrectList" ng-show="showIncorrectList">
+			Review the questions you didn't get right!
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Question</th>
+						<th>Your Answer</th>
+						<th>Correct Answer</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="answer in resultIncorrect track by $index">
+					<td>{{answer.questionNo}}. {{answer.word}}</td>
+					<td>{{answer.answerOptions.definition}}</td>
+					<td>{{answer.definition}}</td>
+				</tr>
+			</table>
+
+		</div>
 	</div>
 </div>
-
