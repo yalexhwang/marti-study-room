@@ -74,6 +74,7 @@
 		</div>
 		<div id="submit">
 			<button type="submit" class="btn btn-default">Done</button>
+			<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
 		</div>
 	</form>
 	<div id="quiz-result" ng-show="showResult">
@@ -81,22 +82,22 @@
 			<div>Your Score: <span>{{score}}</span> ({{resultCorrect.length}}/{{quizList.length}})</div>
 		</div>
 		<div id="incorrectList" ng-show="showIncorrectList">
-			Review the questions you didn't get right!
+			<h5>Review Note</h5>
 			<table class="table">
-				<thead>
-					<tr>
-						<th>Question</th>
-						<th>Your Answer</th>
-						<th>Correct Answer</th>
+				<tbody>
+					<tr ng-repeat="answer in resultIncorrect track by $index">
+						<td class="col1">{{answer.questionNo}}. {{answer.word}}</td>
+						<td>
+							<span class="incorrectAnswer">{{answer.answerOptions.definition}}</span>
+							{{answer.definition}}
+						</td>
 					</tr>
-				</thead>
-				<tr ng-repeat="answer in resultIncorrect track by $index">
-					<td>{{answer.questionNo}}. {{answer.word}}</td>
-					<td>{{answer.answerOptions.definition}}</td>
-					<td>{{answer.definition}}</td>
-				</tr>
+					<tr></tr>
+				</tbody>
 			</table>
-
+		</div>
+		<div id="btn-wrapper">
+			<button type="button" class="btn btn-default btn-lg" ng-click="ok()">OK</button>
 		</div>
 	</div>
 </div>

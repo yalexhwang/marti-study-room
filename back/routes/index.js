@@ -8,6 +8,7 @@ var Passcode = require('../models/passcode');
 // mongoose.connect(config.marti);
 mongoose.connect(mongoUrl);
 
+var bcrypt = require('bcrypt-nodejs');
 var randToken = require('rand-token');
 
 // -------------------------------------------
@@ -18,9 +19,8 @@ var randToken = require('rand-token');
 
 router.post('/signin', function(req, res, next) {
 	var passcode = req.body.passcode;
-	console.log('passcode:' + passcode);
-	Passcode.findOne({'passcode': passcode}, function(err, doc) {
-		console.log('inside the query .findOne()');
+	console.log(passcode);
+	Passcode.findOne({}, function(err, doc) {
 		if (err) {
 			console.log('error while matching the passcode');
 			console.log(err);
@@ -29,38 +29,37 @@ router.post('/signin', function(req, res, next) {
 				doc: err
 			});	
 		} else {
-			console.log('inside else statement');
 			if (doc) {
-				var token = randToken.generate(32);
-				console.log('doc found, token: ' + token);
-				Passcode.findOneAndUpdate({'_id': doc._id}, {$set: {'token': token}}, {new: true}, function(err, doc) {
-					if (err) {
-						console.log('error updating the token info');
-						console.log(err);
-						res.json({
-							passFail: 0,
-							doc: err
-						});
-					} else {
-						console.log('no error generating a token');
-						if (doc) {
+				var match = bcrypt.compareSync(passcode, doc.passcode);
+				if (match) {
+					var token = randToken.generate(32);
+					Passcode.findOneAndUpdate({'_id': doc._id}, {$set: {'token': token}}, {new: true}, function(err, doc) {
+						if (err) {
+							console.log('error updating the token info');
+							console.log(err);
 							res.json({
-								passFail: 1,
-								doc: {
-									id: doc._id,
-									token: doc.token,
-									tests: doc.tests
-								}
+								passFail: 0,
+								doc: err
 							});
 						} else {
-							console.log('no doc found');
-							res.json({
-								passFail: 2,
-								doc: 'Error: passcode did not match (2nd line - check)'
-							});
+							if (doc) {
+								res.json({
+									passFail: 1,
+									doc: {
+										id: doc._id,
+										token: doc.token,
+										tests: doc.tests
+									}
+								});
+							} else {
+								res.json({
+									passFail: 2,
+									doc: 'Error: passcode did not match (2nd line - check)'
+								});
+							}
 						}
-					}
-				});
+					});
+				}
 			} else {
 				console.log('no doc found');
 				res.json({
@@ -220,5 +219,24 @@ router.post('/get_full_list', function(req, res, next) {
 	});
 });
 
+router.post('/update_record', function(req, res, next) {
+	var word = req.body;
+	console.log(word);
+	Word.findOneAndUpdate({'_id': word._id}, {$set: {'record': word.record}}, {new: true}, function(err, doc) {
+		if (err) {
+			console.log('Error while updating the word record');
+			console.log(err);
+			res.json({
+				passFail: 0,
+				doc: err
+			});
+		} else {
+			res.json({
+				passFail: 1,
+				doc: doc
+			});
+		}
+	});
+});
 
 module.exports = router;

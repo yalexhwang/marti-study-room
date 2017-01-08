@@ -1,4 +1,4 @@
-martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies, WordBankService) {
+martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies, $route, $window, WordBankService) {
 	if ($rootScope.signedIn === 0) {
 		$location.path('/signin');
 	}
@@ -8,7 +8,7 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 	$scope.showQuizSetting = 1;
 	$scope.showQuiz = 0;
 	$scope.showResult = 0;
-	$scope.quizOption1 = 5;
+	$scope.quizOption1 = 3;
 	$scope.quizOption2 = "All";
 	$scope.quizOption3 = 4;
 	$scope.quizOption4 = "No";
@@ -18,7 +18,6 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 	WordBankService.getFullList()
 	.then(function success(rspns) {
 		$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-		console.log($scope.fullList);
 	}, function fail(rspns) {
 		console.log(rspns);
 	});
@@ -54,7 +53,6 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 					subList.push(fullList[i]);
 				}
 			}
-			console.log(subList);
 			$scope.quizList = shuffleArray($scope.quizList).slice(0, $scope.quizOption1);
 			for (var i = 0; i < $scope.quizList.length; i++) {
 				var options = [];
@@ -68,7 +66,6 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 				$scope.quizList[i].answerOptions = shuffleArray(shuffleArray(options));
 			}
 		}
-		console.log($scope.quizList);
 
 		if ($scope.quizList.length === 0) {
 			$scope.showQuizNotif = 1;
@@ -86,7 +83,6 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 	};
 	
 	$scope.submit = function() {
-		console.log(userAnswers);
 		$scope.showResult = 1;
 		$scope.resultIncorrect = [];
 		$scope.resultCorrect = [];
@@ -100,9 +96,36 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 				$scope.showIncorrectList = 1;
 			}
 		}
-		$scope.score = $scope.resultCorrect.length / $scope.quizList.length * 100;
+		$scope.score = ($scope.resultCorrect.length / $scope.quizList.length * 100).toFixed(2);
 		$scope.showResult = 1;
-		console.log($scope.resultIncorrect);
 	};
 
+	$scope.cancel = function() {
+		var confirm = $window.confirm('Are you sure?');
+		if (confirm) {
+			$route.reload();
+		}
+	}
+
+	$scope.ok = function() {
+		if ($rootScope.signedIn) {
+			var correct = updateWordRecord($scope.resultCorrect, 1);
+			var incorrect = updateWordRecord($scope.resultIncorrect, 0);
+			var list = correct.concat(incorrect);
+			WordBankService.updateWordRecord(list)
+			.then(function success(rspns) {
+				console.log(rspns);
+				for (var i = 0; i < rspns.length; i++) {
+					if (rspns[i].data.passFail) {
+						console.log(rspns[i].data);
+					} else {
+						console.log(rspns[i].data);
+					}
+				}
+			}, function fail(rspns) {
+				console.log(rspns);
+			});
+		} 
+		$route.reload();
+	}
 });

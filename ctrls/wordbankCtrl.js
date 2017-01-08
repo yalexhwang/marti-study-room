@@ -223,23 +223,26 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 
 	//Remove a word
 	$scope.removeWord = function(index) {
-		var id = {id: $scope.pageList[index]._id};
-		var rootIndex = $scope.pageList[index].rootIndex;
-		WordBankService.remove(id)
-		.then(function success(rspns) {
-			WordBankService.getFullList()
+		var confirm = $window.confirm('Do you want to remove ' + $scope.pageList[index].word + "?");
+		if (confirm) {
+			var id = {id: $scope.pageList[index]._id};
+			var rootIndex = $scope.pageList[index].rootIndex;
+			WordBankService.remove(id)
 			.then(function success(rspns) {
-				//!!!Sort/View Option after add/remove!!!
-				$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
-				$scope.wordBankList = createCurrentList($scope.fullList, 'All');
-				$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
-				$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);
+				WordBankService.getFullList()
+				.then(function success(rspns) {
+					//!!!Sort/View Option after add/remove!!!
+					$scope.fullList = createFullList(rspns.data.doc, convertPartName, convertLngName);
+					$scope.wordBankList = createCurrentList($scope.fullList, 'All');
+					$scope.pageList = createPageList($scope.wordBankList, $scope.currentPage, $scope.wordCount);
+					$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);
+				}, function fail(rspns) {
+					console.log(rspns);
+				});
 			}, function fail(rspns) {
 				console.log(rspns);
 			});
-		}, function fail(rspns) {
-			console.log(rspns);
-		});
+		}
 	};
 
 	//Change page

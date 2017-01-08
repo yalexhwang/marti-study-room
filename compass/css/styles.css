@@ -186,7 +186,6 @@
   width: 90%;
   margin: 0px auto 20px auto;
   text-align: center;
-  font-family: "Muli", sans-serif;
 }
 /* line 95, ../sass/quiz.scss */
 #quiz #quiz-result #score span {
@@ -200,7 +199,26 @@
   margin: auto;
   max-width: 420px;
   font-size: 13px;
-  font-weight: 400;
+  font-family: "Muli", sans-serif;
+}
+/* line 107, ../sass/quiz.scss */
+#quiz #quiz-result #incorrectList h5 {
+  text-align: center;
+}
+/* line 110, ../sass/quiz.scss */
+#quiz #quiz-result #incorrectList .col1 {
+  min-width: 60px;
+}
+/* line 113, ../sass/quiz.scss */
+#quiz #quiz-result #incorrectList .incorrectAnswer {
+  text-decoration: line-through;
+  margin-right: 5px;
+}
+/* line 119, ../sass/quiz.scss */
+#quiz #btn-wrapper {
+  flex: 100%;
+  margin: 10px auto 20px auto;
+  text-align: center;
 }
 
 /* line 1, ../sass/wordbank.scss */

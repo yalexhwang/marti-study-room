@@ -86,6 +86,21 @@ martiApp.service('WordBankService', function($http, $q) {
 		});
 		return def.promise;
 	};
+
+	this.updateWordRecord = function(list) {
+		var def = $q.defer();
+		var ajaxList = [];
+		list.map(function(word) {
+			ajaxList.push($http.post(url + '/update_record', word));
+		})
+		$q.all(ajaxList)
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
 });
 
 //Reusable functions 
@@ -251,5 +266,25 @@ function sortByTimeDescending(a, b) {
 	} else {
 		return 0;
 	}
+}
+
+function updateWordRecord(arr, result) {
+	var newArr = [];
+	var word;
+	for (var i = 0; i < arr.length; i++) {
+		if (result) {
+			word = {
+				_id: arr[i]._id,
+				record: arr[i].record + 1
+			};
+		} else {
+			word = {
+				_id: arr[i]._id,
+				record: arr[i].record - 1
+			};
+		}
+		newArr.push(word);
+	}
+	return newArr;
 }
 
