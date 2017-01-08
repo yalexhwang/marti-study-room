@@ -1,6 +1,6 @@
 var martiApp = angular.module('martiApp', ['ngRoute', 'ngCookies']);
-// var url = "http://www.yalexhwang.com:3000";
-var url = "http://localhost:3000";
+var url = "http://www.yalexhwang.com:3000";
+// var url = "http://localhost:3000";
 
 martiApp.run(function($rootScope, $http, $cookies, $location) {
 	$rootScope.$on('$locationChangeStart', function(event, next, current) {
