@@ -84,42 +84,10 @@ martiApp.controller('wordbankCtrl', function($scope, $rootScope, $window, $locat
 				$scope.pages = calculatePageView($scope.wordBankList.length, $scope.wordCount);	
 			}
 
-			// console.log($scope.fullList);
-			// console.log($scope.wordBankList);
-			// console.log($scope.pages);
-			// console.log($scope.partCategory);
-			// if ($scope.partCategory) {
-			// 	console.log('there is');
-			// 	$scope.wordBankList = createCurrentList($scope.fullList, $scope.partCategory);
-			// } else {
-			// 	console.log('~~~~all');
-			// 	$scope.wordBankList = createCurrentList($scope.fullList, "All");
-			// }
-			
 			//Depends on sort setting
 			console.log(sortByWord);
 			console.log(sortByPart);
 			console.log(sortByTime);
-
-			// if (sortByWord.on) {
-			// 	if (sortByWord.reverse) {
-
-			// 	} else {
-
-			// 	}
-			// } else if (sortByPart.on) {
-			// 	if (sortByWord.reverse) {
-
-			// 	} else {
-					
-			// 	}
-			// } else if (sortByTime.on) {
-			// 	if (sortByWord.reverse) {
-
-			// 	} else {
-					
-			// 	}
-			// }
 			$scope.showNotif = 0;
 			$scope.showUpdateBtn = 0;
 		}, function fail(rspns) {
