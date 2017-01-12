@@ -1,4 +1,9 @@
 martiApp.controller('mypageCtrl', function($scope, $rootScope, TestResultService) {
+	if ($rootScope.signedIn === 0) {
+		$location.path('/signin');
+	}
+	console.log('mypageCtrl');
+	
 	TestResultService.getPreviousResults()
 	.then(function success(rspns) {
 		console.log(rspns);
