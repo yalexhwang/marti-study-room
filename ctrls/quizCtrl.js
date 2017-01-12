@@ -1,4 +1,4 @@
-martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies, $route, $window, WordBankService) {
+martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies, $route, $window, WordBankService, TestResultService) {
 	if ($rootScope.signedIn === 0) {
 		$location.path('/signin');
 	}
@@ -114,7 +114,6 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 			var list = correct.concat(incorrect);
 			WordBankService.updateWordRecord(list)
 			.then(function success(rspns) {
-				console.log(rspns);
 				for (var i = 0; i < rspns.length; i++) {
 					if (rspns[i].data.passFail) {
 						console.log(rspns[i].data);
@@ -125,7 +124,28 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 			}, function fail(rspns) {
 				console.log(rspns);
 			});
-		} 
+			
+			var resultObj = {
+				score: {
+					percentile: Number($scope.score),
+					correctAnswers: $scope.resultCorrect.length,
+					totalQuestions: $scope.quizList.length
+				},
+				multipleChoices: $scope.quizOption3
+			};
+			if ($scope.quizOption2 !== "All") {
+				result.specified = $scope.quizOption2;
+			}
+			TestResultService.updateTestResult(resultObj)
+			.then(function success(rspns) {
+				if (rspns.data.passFail === 0) {
+					console.log('error:');
+					cosnole.log(rspns.data.doc);
+				} 
+			}, function fail(rspns) {
+				console.log(rspns);
+			});
+		}
 		$route.reload();
 	}
 });

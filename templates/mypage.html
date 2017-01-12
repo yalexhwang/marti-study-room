@@ -1,1 +1,25 @@
-mypage
+<div id="resultList">
+	<div id="average">
+		<div>Your Average Score:<span id="score">{{averageScore}}</span></div>
+	</div>
+	<table class="table table-hover">
+		<thead>
+	 		<tr id="heading">
+	 			<td>No.</td>
+	 			<td>Date</td>
+	 			<td>Part Category</td>
+	 			<td>Multiple Choices</td>
+	 			<td>Timed</td>
+	 			<td>Score</td>
+	 		</tr>
+ 		</thead>
+ 		<tr ng-repeat="result in previousResults">
+ 			<td>{{$index + 1}}</td>
+ 			<td>{{result.createdAt}}</td>
+ 			<td>{{result.specified}}</td>
+ 			<td>{{result.multipleChoices}}</td>
+ 			<td>{{result.timed}}</td>
+ 			<td><span class="score">{{result.score.percentile}}</span> ({{result.score.correctAnswers}}/{{result.score.totalQuestions}})</td>
+ 		</tr>
+ 	</table>
+</div>

@@ -328,6 +328,45 @@
   font-family: "Libre Franklin", helvetica, sans-serif;
 }
 
+/* line 1, ../sass/mypage.scss */
+#resultList {
+  width: 100%;
+  margin: auto;
+}
+@media (min-width: 480px) {
+  /* line 1, ../sass/mypage.scss */
+  #resultList {
+    width: 90%;
+  }
+}
+/* line 8, ../sass/mypage.scss */
+#resultList #average {
+  text-align: center;
+}
+/* line 11, ../sass/mypage.scss */
+#resultList #average #score {
+  color: red;
+  font-family: 'Handlee', serif;
+  font-size: 38px;
+  padding: 0px 15px;
+}
+/* line 18, ../sass/mypage.scss */
+#resultList table {
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+/* line 23, ../sass/mypage.scss */
+#resultList table #heading {
+  font-size: 13px;
+}
+/* line 27, ../sass/mypage.scss */
+#resultList .score {
+  color: red;
+  font-family: 'Handlee', serif;
+}
+
 /* line 1, ../sass/signin.scss */
 #signin-wrapper {
   min-width: 200px;
@@ -338,12 +377,12 @@
   margin-top: 25px;
 }
 
-/* line 13, ../sass/styles.scss */
+/* line 14, ../sass/styles.scss */
 body {
   min-width: 320px;
   background-color: #d8bfd8;
 }
-/* line 17, ../sass/styles.scss */
+/* line 18, ../sass/styles.scss */
 body #navigation {
   margin: auto;
   width: 100%;
@@ -352,48 +391,48 @@ body #navigation {
   flex-flow: row wrap;
 }
 @media (min-width: 768px) {
-  /* line 17, ../sass/styles.scss */
+  /* line 18, ../sass/styles.scss */
   body #navigation {
     width: 90%;
   }
 }
 @media (min-width: 992px) {
-  /* line 17, ../sass/styles.scss */
+  /* line 18, ../sass/styles.scss */
   body #navigation {
     width: 80%;
   }
 }
-/* line 29, ../sass/styles.scss */
+/* line 30, ../sass/styles.scss */
 body #navigation a {
   text-decoration: none;
 }
-/* line 33, ../sass/styles.scss */
+/* line 34, ../sass/styles.scss */
 body #navigation .nav-row {
   flex: 100%;
 }
-/* line 37, ../sass/styles.scss */
+/* line 38, ../sass/styles.scss */
 body #navigation .nav-signin {
   text-align: right;
 }
-/* line 39, ../sass/styles.scss */
+/* line 40, ../sass/styles.scss */
 body #navigation .nav-signin a {
   font-size: 11px;
   padding: 5px;
   margin-right: 10px;
 }
-/* line 46, ../sass/styles.scss */
+/* line 47, ../sass/styles.scss */
 body #navigation #title {
   text-align: center;
   font-weight: 500;
   font-size: 26px;
 }
 @media (min-width: 480px) {
-  /* line 46, ../sass/styles.scss */
+  /* line 47, ../sass/styles.scss */
   body #navigation #title {
     font-size: 32px;
   }
 }
-/* line 55, ../sass/styles.scss */
+/* line 56, ../sass/styles.scss */
 body #navigation #menu {
   margin: 20px auto 5px auto;
   width: 100%;
@@ -403,24 +442,24 @@ body #navigation #menu {
   justify-content: space-around;
 }
 @media (min-width: 320px) {
-  /* line 55, ../sass/styles.scss */
+  /* line 56, ../sass/styles.scss */
   body #navigation #menu {
     width: 95%;
   }
 }
 @media (min-width: 480px) {
-  /* line 55, ../sass/styles.scss */
+  /* line 56, ../sass/styles.scss */
   body #navigation #menu {
     width: 80%;
   }
 }
 @media (min-width: 992px) {
-  /* line 55, ../sass/styles.scss */
+  /* line 56, ../sass/styles.scss */
   body #navigation #menu {
     width: 70%;
   }
 }
-/* line 74, ../sass/styles.scss */
+/* line 75, ../sass/styles.scss */
 body #content {
   margin: 0px auto 20px auto;
   padding: 20px 5px;
@@ -430,20 +469,20 @@ body #content {
   flex-flow: row wrap;
 }
 @media (min-width: 320px) {
-  /* line 74, ../sass/styles.scss */
+  /* line 75, ../sass/styles.scss */
   body #content {
     width: 95%;
     border-radius: 7px;
   }
 }
 @media (min-width: 480px) {
-  /* line 74, ../sass/styles.scss */
+  /* line 75, ../sass/styles.scss */
   body #content {
     width: 82%;
   }
 }
 @media (min-width: 992px) {
-  /* line 74, ../sass/styles.scss */
+  /* line 75, ../sass/styles.scss */
   body #content {
     width: 70%;
   }

@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var mongoUrl = 'mongodb://localhost:27017/marti';
 var Word = require('../models/word');
 var Passcode = require('../models/passcode');
-// mongoose.connect(config.marti);
+var TestResult = require('../models/testResult');
 mongoose.connect(mongoUrl);
 
 var bcrypt = require('bcrypt-nodejs');
@@ -133,6 +133,7 @@ router.post('/signout', function(req, res, next) {
 });
 
 router.post('/add', function(req, res, next) {
+	console.log(req.body);
 	var lng = req.body.language;
 	var word = req.body.word;
 	var part = Number(req.body.part);
@@ -236,6 +237,44 @@ router.post('/update_record', function(req, res, next) {
 			});
 		}
 	});
+});
+
+router.post('/update_test_result', function(req, res, next) {
+	var newTestResult = new TestResult(req.body);
+	console.log(newTestResult);
+	newTestResult.save(function(err, saved, status) {
+		if (err) {
+			console.log('Error while saving the new test result');
+			console.log(err);
+			res.json({
+				passFail: 0,
+				doc: err
+			});
+		} else {
+			res.json({
+				passFail: 1,
+				doc: saved
+			});
+		}
+	})
+});
+
+router.post('/get_test_results', function(req, res, next) {
+	TestResult.find({}, function(err, doc) {
+		if (err) {
+			console.log("Error while getting all test results");
+			console.log(err);
+			res.json({
+				passFail: 0,
+				doc: err
+			});
+		} else {
+			res.json({
+				passFail: 1,
+				doc: doc
+			});
+		}
+	})
 });
 
 module.exports = router;

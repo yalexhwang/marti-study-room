@@ -1,6 +1,6 @@
 var martiApp = angular.module('martiApp', ['ngRoute', 'ngCookies']);
-var url = "http://www.yalexhwang.com:3001";
-// var url = "http://localhost:3001";
+// var url = "http://www.yalexhwang.com:3001";
+var url = "http://localhost:3001";
 
 martiApp.run(function($rootScope, $http, $cookies, $location) {
 	$rootScope.$on('$locationChangeStart', function(event, next, current) {
@@ -94,6 +94,30 @@ martiApp.service('WordBankService', function($http, $q) {
 			ajaxList.push($http.post(url + '/update_record', word));
 		})
 		$q.all(ajaxList)
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
+});
+
+martiApp.service('TestResultService', function($http, $q) {
+	this.updateTestResult = function(result) {
+		var def = $q.defer();
+		$http.post(url + '/update_test_result', result)
+		.then(function success(rspns) {
+			def.resolve(rspns);
+		}, function fail(rspns) {
+			def.reject(rspns);
+		});
+		return def.promise;
+	};
+
+	this.getPreviousResults = function() {
+		var def = $q.defer();
+		$http.post(url + '/get_test_results')
 		.then(function success(rspns) {
 			def.resolve(rspns);
 		}, function fail(rspns) {
@@ -288,3 +312,8 @@ function updateWordRecord(arr, result) {
 	return newArr;
 }
 
+function calculateAverage(arr) {
+	return (arr.reduce(function(total, result) {
+		return total + result.score.percentile;
+	}, 0))/arr.length;
+}
