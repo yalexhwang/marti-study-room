@@ -22,7 +22,7 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 		});
 	};
 
-	console.log('----');
+	console.log('is it going to be in ver2?');
 	var index = 0;
 	WordBankService.getFullList()
 	.then(function success(rspns) {
