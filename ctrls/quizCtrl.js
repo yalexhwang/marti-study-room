@@ -109,22 +109,23 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 
 	$scope.ok = function() {
 		if ($rootScope.signedIn) {
-			var correct = updateWordRecord($scope.resultCorrect, 1);
-			var incorrect = updateWordRecord($scope.resultIncorrect, 0);
-			var list = correct.concat(incorrect);
-			WordBankService.updateWordRecord(list)
-			.then(function success(rspns) {
-				for (var i = 0; i < rspns.length; i++) {
-					if (rspns[i].data.passFail) {
-						console.log(rspns[i].data);
-					} else {
-						console.log(rspns[i].data);
+			if ($scope.user.name == "marti") {
+				var correct = updateWordRecord($scope.resultCorrect, 1);
+				var incorrect = updateWordRecord($scope.resultIncorrect, 0);
+				var list = correct.concat(incorrect);
+				WordBankService.updateWordRecord(list)
+				.then(function success(rspns) {
+					for (var i = 0; i < rspns.length; i++) {
+						if (rspns[i].data.passFail) {
+							console.log(rspns[i].data);
+						} else {
+							console.log(rspns[i].data);
+						}
 					}
-				}
-			}, function fail(rspns) {
-				console.log(rspns);
-			});
-			
+				}, function fail(rspns) {
+					console.log(rspns);
+				});
+			}			
 			var resultObj = {
 				user_id: $scope.user._id,
 				score: {
@@ -134,7 +135,6 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 				},
 				multipleChoices: $scope.quizOption3
 			};
-			console.log(resultObj);
 			if ($scope.quizOption2 !== "All") {
 				result.specified = $scope.quizOption2;
 			}
