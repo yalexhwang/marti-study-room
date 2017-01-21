@@ -21,7 +21,8 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 			//alert: try again (AJAX call fail)
 		});
 	};
-	console.log('00000000');
+
+	console.log('----');
 	var index = 0;
 	WordBankService.getFullList()
 	.then(function success(rspns) {
