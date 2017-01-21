@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var testResultSchema = new Schema({
+	user_id: {type: String, required: true},
 	score: {
 		percentile: {type: Number, required: true},
 		correctAnswers: {type: Number, required: true},

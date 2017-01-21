@@ -126,6 +126,7 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 			});
 			
 			var resultObj = {
+				user_id: $scope.user._id,
 				score: {
 					percentile: Number($scope.score),
 					correctAnswers: $scope.resultCorrect.length,
@@ -133,6 +134,7 @@ martiApp.controller('quizCtrl', function($scope, $rootScope, $location, $cookies
 				},
 				multipleChoices: $scope.quizOption3
 			};
+			console.log(resultObj);
 			if ($scope.quizOption2 !== "All") {
 				result.specified = $scope.quizOption2;
 			}

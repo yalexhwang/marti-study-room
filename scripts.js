@@ -1,13 +1,13 @@
 var martiApp = angular.module('martiApp', ['ngRoute', 'ngCookies']);
-var url = "http://www.yalexhwang.com:3001";
-// var url = "http://localhost:3001";
+// var url = "http://www.yalexhwang.com:3001";
+var url = "http://localhost:3001";
 
 martiApp.run(function($rootScope, $http, $cookies, $location) {
 	$rootScope.$on('$locationChangeStart', function(event, next, current) {
 		console.log('rootScope.signedIn: ' + $rootScope.signedIn);
-		var user = $cookies.getObject('user');
-		if (user !== undefined) {
-			$http.post(url + '/verify', user)
+		var userObj = $cookies.getObject('user');
+		if (userObj !== undefined) {
+			$http.post(url + '/verify', userObj)
 			.then(function success(rspns) {
 				if (rspns.data.passFail === 1) {
 					$rootScope.signedIn = 1;
@@ -115,9 +115,9 @@ martiApp.service('TestResultService', function($http, $q) {
 		return def.promise;
 	};
 
-	this.getPreviousResults = function() {
+	this.getPreviousResults = function(userObj) {
 		var def = $q.defer();
-		$http.post(url + '/get_test_results')
+		$http.post(url + '/get_test_results', userObj)
 		.then(function success(rspns) {
 			def.resolve(rspns);
 		}, function fail(rspns) {
@@ -141,11 +141,13 @@ function convertPartName(num) {
 		case 4:
 			return "부사(adverb)";
 		case 5:
-			return "전치사(proposition)";
+			return "전치사(preposition)";
 		case 6:
 			return "접속사(conjuction)";
 		case 7:
 			return "감탄사(interjection)";
+		case 8: 
+			return "문구(expression)"
 		default: 
 			return "N/A"
 	}

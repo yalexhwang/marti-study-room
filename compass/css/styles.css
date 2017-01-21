@@ -369,12 +369,28 @@
 
 /* line 1, ../sass/signin.scss */
 #signin-wrapper {
+  flex: 100%;
+}
+/* line 3, ../sass/signin.scss */
+#signin-wrapper form {
+  width: 80%;
   min-width: 200px;
+  max-width: 300px;
   margin: auto;
 }
-/* line 4, ../sass/signin.scss */
+/* line 9, ../sass/signin.scss */
 #signin-wrapper #signin-notification {
   margin-top: 25px;
+}
+
+/* line 14, ../sass/signin.scss */
+#guest-signin {
+  margin-top: 25px;
+  max-width: 300px;
+  min-width: 200px;
+  background-color: green;
+  margin: auto;
+  text-align: center;
 }
 
 /* line 14, ../sass/styles.scss */

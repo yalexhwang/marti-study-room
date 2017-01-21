@@ -16,22 +16,46 @@ var randToken = require('rand-token');
 // passFail 2: success with error (doc: 'String')
 // -------------------------------------------
 
-router.post('/signin', function(req, res, next) {
-	var passcode = req.body.passcode;
-	console.log(passcode);
-	Passcode.findOne({}, function(err, doc) {
+router.get('/test', function(req, res, next) {
+	console.log('-----------------');
+	var user = req.query.user;
+	var pw = req.query.pw;
+	console.log(req.query);
+	var newPasscode = new Passcode({
+		user: user,
+		passcode: bcrypt.hashSync(pw)
+	});
+	console.log(newPasscode);
+	newPasscode.save(function(err, saved, status) {
 		if (err) {
-			console.log('error while matching the passcode');
+			res.json(err);
+		} else {
+			res.json(saved);
+		}
+	});
+});
+
+router.post('/signin', function(req, res, next) {
+	var user = req.body.user;
+	var passcode = req.body.passcode;
+	console.log(user);
+	console.log(passcode);
+	Passcode.findOne({'user': user}, function(err, doc) {
+		if (err) {
+			console.log('error while finding the user match');
 			console.log(err);
 			res.json({
 				passFail: 0,
 				doc: err
 			});	
 		} else {
+			console.log('no error!');
 			if (doc) {
 				var match = bcrypt.compareSync(passcode, doc.passcode);
+				console.log('match: ' + match);
 				if (match) {
 					var token = randToken.generate(32);
+					console.log('token: ' + token);
 					Passcode.findOneAndUpdate({'_id': doc._id}, {$set: {'token': token}}, {new: true}, function(err, doc) {
 						if (err) {
 							console.log('error updating the token info');
@@ -41,29 +65,23 @@ router.post('/signin', function(req, res, next) {
 								doc: err
 							});
 						} else {
-							if (doc) {
-								res.json({
-									passFail: 1,
-									doc: {
-										id: doc._id,
-										token: doc.token,
-										tests: doc.tests
-									}
-								});
-							} else {
-								res.json({
-									passFail: 2,
-									doc: 'Error: passcode did not match (2nd line - check)'
-								});
-							}
+							res.json({
+								passFail: 1,
+								doc: doc
+							});
 						}
+					});
+				} else {
+					res.json({
+						passFail: 2,
+						doc: 'Error: passcode did not match'
 					});
 				}
 			} else {
-				console.log('no doc found');
+				console.log('no user found');
 				res.json({
 					passFail: 2,
-					doc: 'Error: passcode did not match'
+					doc: 'Error: no user found'
 				});
 			}
 		}
@@ -71,8 +89,10 @@ router.post('/signin', function(req, res, next) {
 });
 
 router.post('/verify', function(req, res, next) {
+	console.log('/verify');
 	var user = req.body;
-	Passcode.findOne({'_id': user.id}, function(err, doc) {
+	console.log(user);
+	Passcode.findOne({'_id': user._id}, function(err, doc) {
 		if (err) {
 			console.log('Error while running the query');
 			console.log(err);
@@ -260,9 +280,12 @@ router.post('/update_test_result', function(req, res, next) {
 });
 
 router.post('/get_test_results', function(req, res, next) {
-	TestResult.find({}, function(err, doc) {
+	console.log('get_test_results');
+	var user = req.body;
+	console.log(user);
+	TestResult.find({'user_id': user._id}, function(err, doc) {
 		if (err) {
-			console.log("Error while getting all test results");
+			console.log("Error while finding the matching user");
 			console.log(err);
 			res.json({
 				passFail: 0,

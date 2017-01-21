@@ -2,7 +2,8 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 	$scope.wordCover = 0;
 	$scope.partCover = 0;
 	$scope.definitionCover = 0;
-
+	var userCookie = $cookies.getObject('user')
+	console.log(userCookie);
 	$scope.signout = function() {
 		$http.post(url + '/signout', $cookies.getObject('user'))
 		.then(function success(rspns) {
@@ -20,7 +21,7 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 			//alert: try again (AJAX call fail)
 		});
 	};
-
+	console.log('000');
 	var index = 0;
 	WordBankService.getFullList()
 	.then(function success(rspns) {
