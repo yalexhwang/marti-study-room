@@ -21,6 +21,7 @@ martiApp.controller('homeCtrl', function($scope, $rootScope, $http, $cookies, $l
 		});
 	};
 
+	console.log('----');
 	var index = 0;
 	WordBankService.getFullList()
 	.then(function success(rspns) {
