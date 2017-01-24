@@ -50,5 +50,5 @@ already in use by another application on my server. I opened another port and al
 ##Future Implementation
 - **Quiz Option - Timed feature**: Record a total time taken to completed the quiz, or set a time limit 
 - **Customization - background**: Allow a user to upload a photo to be used as the background of the app
-
+- **Ver.3**: Rewrite code in OOP 
 
