@@ -44,7 +44,7 @@ which is resolved or rejected depending on return value of an AJAX call it makes
 at once, they are passed to the service as an array, prompting the service to make consecutive AJAX calls.`$q.all` was used 
 to make sure all requests are returned before calling the callback function.
 - **Opening a Port**: When the application was deployed to my server initially, no data was being returned from the database. 
-The application was listenting to port 3000, the default value set by Express generator. It turned out that port 3000 was 
+The application was listening to port 3000, the default value set by Express generator. It turned out that port 3000 was 
 already in use by another application on my server. I opened another port and allowed inbound traffic to it on AWS.
 
 ##Future Implementation
