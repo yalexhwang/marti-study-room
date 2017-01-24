@@ -1,6 +1,6 @@
 # Marti's Study Room
 
-Marti's Study Room has been rebuilt from the original, as a complete web application with a database connection. 
+Marti's Study Room has been rebuilt from the original(https://github.com/yalexhwang/Marti-vocab-study), as a complete web application with a database connection. 
 My student can review vocabulary, manage words in the database, or take a quiz. 
 Results of a quiz completed is saved to the database in order to track her progress over time.
 
