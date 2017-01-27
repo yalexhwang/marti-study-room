@@ -58,7 +58,8 @@ martiApp.service('WordBankService', function($http, $q) {
 		var def = $q.defer();
 		$http.post(url + '/add', newWord)
 		.then(function success(rspns) {
-			def.resolve(rspns);
+			// def.resolve(rspns);
+			//Manipulate data here then resolve
 		}, function fail(rspns) {
 			def.reject(rspns);
 		});
