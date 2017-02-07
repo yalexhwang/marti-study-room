@@ -6,6 +6,8 @@ Quiz Results are saved to the database in order to track her progress over time.
 
 <link>www.yalexhwang.com/marti-study-room</link>
 
+<a href="https://youtu.be/CSgIH1--ssM" target="_blank"><img src="http://www.yalexhwang.com/img-stash/demo-marti-thumb.png" width="460" height="auto"></a>
+
 ##Technologies & Frameworks 
 - HTML
 - CSS/SASS
@@ -22,14 +24,33 @@ Quiz Results are saved to the database in order to track her progress over time.
   - Hide part(s) of the flash card to practice memorization
   - Specify a category (verbs, nouns, etc)
   - Shuffle the order 
+  
+<img src="http://www.yalexhwang.com/compass/images/m1.png" width="460" height="auto">
+
 - Quiz 
   - Adjust the default quiz settings to a user's liking: number of questions, vocabulary category, number of answer options, and timed (TBA)
   - Complete a quiz and review the results: a list of questions that a user did not get right is displayed with the correct answer
   - Upon clikcing 'OK', the results of the quiz is sent to the DB and saved under the user's record
-  - Each word on the quiz is updated with the result as well: +1 for the correct answer, -1 for the incorrect answer; for later use to review words by previous reesults
+  - Each word on the quiz is updated with the result as well: +1 for the correct answer, -1 for the incorrect answer; for later use to review words by previous results
+  
+<img src="http://www.yalexhwang.com/compass/images/m2.png" width="460" height="auto">
+
+<img src="http://www.yalexhwang.com/compass/images/m3.png" width="460" height="auto">
+
 - Word Bank
   - Add or remove a word
   - See words available in the DB in a table form
+  
+<img src="http://www.yalexhwang.com/compass/images/m4.png" width="460" height="auto">
+
+##Code Snippets
+<img src="http://www.yalexhwang.com/img-stash/snippet-marti-1.png" width="440" height="auto">
+
+<img src="http://www.yalexhwang.com/img-stash/snippet-marti-2.png" width="440" height="auto">
+
+<img src="http://www.yalexhwang.com/img-stash/snippet-marti-3.png" width="520" height="auto">
+
+<img src="http://www.yalexhwang.com/img-stash/snippet-marti-4.png" width="520" height="auto">
 
 ##Notes
 - **Nested ngRepeat**: A quiz is generated using ngRepeat on `$scope.quizList`, an array of objects, each of which represents
@@ -47,8 +68,8 @@ to make sure all requests are returned before calling the callback function.
 The application was listening to port 3000, the default value set by Express generator. It turned out that port 3000 was 
 already in use by another application on my server. I opened another port and allowed inbound traffic to it on AWS.
 
-##Future Implementation
+##Ideas for Future Implementation
 - **Quiz Option - Timed feature**: Record a total time taken to completed the quiz, or set a time limit 
 - **Customization - background**: Allow a user to upload a photo to be used as the background of the app
-- **Ver.3**: Rewrite code in OOP 
+- **Ver.3**: Refatoring in OOP
 
