@@ -2,7 +2,7 @@
 
 Marti's Study Room has been rebuilt from the original(https://github.com/yalexhwang/Marti-vocab-study), as a complete web application with a database connection. 
 My student can review vocabulary, manage words in the database, or take a quiz. 
-Results of a quiz completed is saved to the database in order to track her progress over time.
+Quiz Results are saved to the database in order to track her progress over time.
 
 <link>www.yalexhwang.com/marti-study-room</link>
 
@@ -36,7 +36,7 @@ Results of a quiz completed is saved to the database in order to track her progr
 a quiz question. Because a quiz question comes with multiple answer options, the object has a property answerOptions, 
 which in turn is an array of objects. So, a ngRepeat directive is used to iterate over the array `$scope.quizList` 
 to populate questions. Then, another ngRepeat, nested inside of the first ngRepeat, loops through the array of answer options
-that belongs to the quiz question object, populating answer options for the question. Because of rather complicated data 
+that belongs to the quiz question object, populating answer options for the question. Because of the rather complicated data 
 structure, it was tricky to place the directives properly within DOM elements while keeping track of `$index` from both arrays.
 - **Consecutive AJAX Requests on Array**: Each word in the database is tracked with quiz records, whether a student answered 
 the word in question correctly or not. A service method `WordBankService.updateWordRecord` returns a deferred promise, 
